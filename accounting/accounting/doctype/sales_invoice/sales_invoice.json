@@ -1,7 +1,6 @@
 {
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
- "allow_rename": 1,
  "autoname": "naming_series:",
  "creation": "2021-09-16 14:42:50.125670",
  "doctype": "DocType",
@@ -16,25 +15,32 @@
   "total_qty",
   "total_amount",
   "debit_to",
-  "income_account"
+  "income_account",
+  "amended_from"
  ],
  "fields": [
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Naming Series",
-   "options": "SL_INV_.####"
+   "options": "ACC-SINV-.YYYY.-\nACC-SINV-RET-.YYYY.-",
+   "reqd": 1
   },
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Customer",
-   "options": "Party"
+   "options": "Party",
+   "reqd": 1
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "reqd": 1
   },
   {
    "fieldname": "payment_due_date",
@@ -45,34 +51,52 @@
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Items",
-   "options": "Items"
+   "options": "Items",
+   "reqd": 1
   },
   {
    "fieldname": "total_qty",
    "fieldtype": "Int",
-   "label": "Total Qty"
+   "label": "Total Qty",
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
-   "label": "Total Amount"
+   "label": "Total Amount",
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "debit_to",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Debit To",
-   "options": "Account"
+   "options": "Account",
+   "reqd": 1
   },
   {
    "fieldname": "income_account",
    "fieldtype": "Link",
    "label": "Income Account",
-   "options": "Account"
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sales Invoice",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2021-09-16 14:55:46.104673",
+ "modified": "2021-09-17 13:47:31.251949",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",
@@ -92,6 +116,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1

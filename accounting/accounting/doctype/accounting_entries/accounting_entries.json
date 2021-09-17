@@ -1,4 +1,5 @@
 {
+ "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "creation": "2021-09-16 15:31:34.450404",
@@ -16,14 +17,18 @@
   {
    "fieldname": "account",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Account",
-   "options": "Account"
+   "options": "Account",
+   "reqd": 1
   },
   {
    "fieldname": "party",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Party",
-   "options": "Party"
+   "options": "Party",
+   "reqd": 1
   },
   {
    "fieldname": "debit",
@@ -44,7 +49,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-09-16 15:31:41.655278",
+ "modified": "2021-09-16 19:01:31.339404",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Accounting Entries",

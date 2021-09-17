@@ -1,4 +1,5 @@
 {
+ "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
@@ -13,50 +14,72 @@
   "accounting_entries",
   "total_debit",
   "total_credit",
-  "difference"
+  "difference",
+  "amended_from"
  ],
  "fields": [
   {
    "fieldname": "naming_series",
-   "fieldtype": "Data",
-   "label": "Naming Series"
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Naming Series",
+   "options": "ACC-JV-.YYYY.-",
+   "reqd": 1
   },
   {
    "fieldname": "party",
-   "fieldtype": "Data",
-   "label": "Party"
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Party",
+   "options": "Party",
+   "reqd": 1
   },
   {
    "fieldname": "posting_date",
-   "fieldtype": "Data",
-   "label": "Posting Date"
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "reqd": 1
   },
   {
    "fieldname": "accounting_entries",
    "fieldtype": "Table",
    "label": "Accounting Entries",
-   "options": "Accounting Entries"
+   "options": "Accounting Entries",
+   "reqd": 1
   },
   {
    "fieldname": "total_debit",
    "fieldtype": "Currency",
-   "label": "Total Debit"
+   "label": "Total Debit",
+   "read_only": 1
   },
   {
    "fieldname": "total_credit",
    "fieldtype": "Currency",
-   "label": "Total Credit"
+   "label": "Total Credit",
+   "read_only": 1
   },
   {
    "fieldname": "difference",
    "fieldtype": "Currency",
-   "label": "Difference",
+   "label": "Difference (Dr - Cr)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Journal Entry",
+   "print_hide": 1,
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2021-09-16 15:37:31.878106",
+ "modified": "2021-09-17 13:52:28.640964",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Journal Entry",

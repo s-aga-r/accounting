@@ -2,20 +2,19 @@
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "autoname": "naming_series:",
- "creation": "2021-09-16 14:48:52.617835",
+ "creation": "2021-09-16 20:09:31.071978",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "supplier",
   "posting_date",
-  "payment_due_date",
-  "items",
-  "total_qty",
-  "total_amount",
-  "credit_to",
-  "expense_account",
+  "payment_type",
+  "party_type",
+  "party",
+  "account_paid_from",
+  "account_paid_to",
+  "amount",
   "amended_from"
  ],
  "fields": [
@@ -24,63 +23,57 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Naming Series",
-   "options": "ACC-PINV-.YYYY.-\nACC-PINV-RET-.YYYY.-",
-   "reqd": 1
-  },
-  {
-   "fieldname": "supplier",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Supplier",
-   "options": "Party",
+   "options": "ACC-PAY-.YYYY.-",
    "reqd": 1
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Posting Date",
+   "label": "Posting Date ",
    "reqd": 1
   },
   {
-   "fieldname": "payment_due_date",
-   "fieldtype": "Date",
-   "label": "Payment Due Date"
-  },
-  {
-   "fieldname": "items",
-   "fieldtype": "Table",
-   "label": "Items",
-   "options": "Items",
-   "reqd": 1
-  },
-  {
-   "fieldname": "total_qty",
-   "fieldtype": "Int",
-   "label": "Total Qty",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "total_amount",
-   "fieldtype": "Currency",
-   "label": "Total Amount",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "credit_to",
-   "fieldtype": "Link",
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Credit To",
+   "label": "Payment Type",
+   "options": "Receive\nPay",
+   "reqd": 1
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Party Type",
+   "options": "Customer\nSupplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Dynamic Link",
+   "label": "Party",
+   "options": "party_type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "account_paid_from",
+   "fieldtype": "Link",
+   "label": "Account Paid From",
    "options": "Account",
    "reqd": 1
   },
   {
-   "fieldname": "expense_account",
+   "fieldname": "account_paid_to",
    "fieldtype": "Link",
-   "label": "Expense Account",
+   "label": "Account Paid To",
    "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
    "reqd": 1
   },
   {
@@ -88,7 +81,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Purchase Invoice",
+   "options": "Payment Entry",
    "print_hide": 1,
    "read_only": 1
   }
@@ -96,10 +89,10 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-17 13:47:23.298206",
+ "modified": "2021-09-17 13:47:16.071846",
  "modified_by": "Administrator",
  "module": "Accounting",
- "name": "Purchase Invoice",
+ "name": "Payment Entry",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [

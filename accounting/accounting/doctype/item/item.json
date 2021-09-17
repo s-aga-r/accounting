@@ -2,6 +2,7 @@
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:item_code",
  "creation": "2021-09-16 13:30:00.592329",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -9,42 +10,60 @@
  "field_order": [
   "item_code",
   "item_name",
-  "default_unit",
-  "selling_rate"
+  "stock_uom",
+  "standard_rate"
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "item_code",
    "fieldtype": "Data",
+   "in_filter": 1,
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Item Code",
    "reqd": 1,
    "unique": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "item_name",
    "fieldtype": "Data",
-   "label": "Item Name",
-   "reqd": 1
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Item Name"
   },
   {
-   "fieldname": "default_unit",
-   "fieldtype": "Data",
-   "label": "Default Unit of Measurement"
-  },
-  {
-   "fieldname": "selling_rate",
+   "allow_in_quick_entry": 1,
+   "fieldname": "standard_rate",
    "fieldtype": "Currency",
-   "label": "Standard Selling Rate",
+   "in_filter": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Standard Selling Rate"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "Nos",
+   "fieldname": "stock_uom",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Default Unit of Measure",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-16 14:50:24.718252",
+ "modified": "2021-09-17 12:01:10.148630",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -60,6 +79,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1
