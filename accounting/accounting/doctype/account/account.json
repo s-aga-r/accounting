@@ -43,9 +43,8 @@
   },
   {
    "fieldname": "account_type",
-   "fieldtype": "Select",
-   "label": "Account Type ",
-   "options": "\nAsset\nLiability\nIncome\nExpense"
+   "fieldtype": "Data",
+   "label": "Account Type "
   },
   {
    "default": "0",
@@ -62,7 +61,8 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Parent Account",
-   "options": "Account"
+   "options": "Account",
+   "reqd": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -113,7 +113,8 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Parent Account",
-   "options": "Account"
+   "options": "Account",
+   "reqd": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -125,15 +126,13 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Root Type",
-   "options": "\nAccounts Receivable\nIncome\nAccounts Payable\nExpense",
-   "read_only": 1,
-   "reqd": 1
+   "options": "Asset\nLiability\nIncome\nExpense\nEquity"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2021-09-17 12:51:45.373431",
+ "modified": "2021-09-17 16:07:07.997252",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Account",
