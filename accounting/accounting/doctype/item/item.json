@@ -11,7 +11,12 @@
   "item_code",
   "item_name",
   "stock_uom",
-  "standard_rate"
+  "standard_rate",
+  "image",
+  "route",
+  "is_active",
+  "in_stock",
+  "description"
  ],
  "fields": [
   {
@@ -40,26 +45,50 @@
    "allow_in_quick_entry": 1,
    "fieldname": "standard_rate",
    "fieldtype": "Currency",
-   "in_filter": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Standard Selling Rate"
+   "label": "Standard Selling Rate",
+   "precision": "2"
   },
   {
    "allow_in_quick_entry": 1,
    "default": "Nos",
    "fieldname": "stock_uom",
    "fieldtype": "Data",
-   "in_filter": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
    "label": "Default Unit of Measure",
    "reqd": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "in_preview": 1,
+   "label": "Image",
+   "options": "image"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "0",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "IsActive"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "in_stock",
+   "fieldtype": "Int",
+   "label": "InStock"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
   }
  ],
- "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-17 12:01:10.148630",
+ "modified": "2021-09-20 16:43:55.488991",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",

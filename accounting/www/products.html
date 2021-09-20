@@ -1,0 +1,28 @@
+{% extends "templates/web.html" %}
+{% block title %}{{ _("Products") }}{% endblock %}
+
+{% block page_content %}
+<h1>Products</h1>
+<div>
+    {% for product in products %}
+    <div class="row bg-light rounded border py-4 mb-4">
+        <div class="col-lg-2 col-md-3 col-xs-4">
+            <img class="rounded" src="{{ product.image }}" alt="{{ product.item_name }}">
+        </div>
+        <div class="col">
+            <h2>{{ product.item_name }}</h2>
+            <div>
+                {%- if product.in_stock < 1 -%}<span class="badge badge-danger">Out of Stock</span>
+                    {%- elif product.in_stock < 5 -%}<span class="badge badge-warning">Hurry, Only {{product.in_stock}}
+                        left!</span>
+                        {%- elif product.in_stock < 10 -%}<span class="badge badge-warning">Hurry, Only few left!</span>
+                            {% else %}<span class="badge badge-success">In Stock</span>
+                            {%- endif -%}
+            </div>
+            <p class="text-muted"><b>₹ {{ product.standard_rate }}</b></p>
+            <button class="btn btn-success btn-sm">Add to Cart</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
