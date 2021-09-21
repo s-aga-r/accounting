@@ -1,0 +1,50 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Cart") }}{% endblock %}
+
+{% block page_content %}
+<h1>{{ _("Cart") }}</h1>
+
+<div>
+    {% if items %}
+    <div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Rate(₹)</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount(₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{item["Name"]}}</td>
+                        <td>{{item["Rate"]}}</td>
+                        <td>{{item["Qty"]}}</td>
+                        <td>{{item["Amount"]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="col" colspan="4">Total</th>
+                        <th scope="col">{{total["Amount"]}}</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <button class="btn btn-success float-right">Checkout</button>
+    </div>
+    {% else %}
+    <div>
+        <b>Your cart is empty!</b>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
