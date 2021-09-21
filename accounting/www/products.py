@@ -2,11 +2,8 @@ import frappe
 
 
 def is_logged_in():
-    user = frappe.session.user
-
-    if user == "Guest":
+    if frappe.session.user == "Guest":
         return False
-
     return True
 
 

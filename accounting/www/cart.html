@@ -23,17 +23,17 @@
                     {% for item in items %}
                     <tr>
                         <th scope="row">{{loop.index}}</th>
-                        <td>{{item["Name"]}}</td>
-                        <td>{{item["Rate"]}}</td>
-                        <td>{{item["Qty"]}}</td>
-                        <td>{{item["Amount"]}}</td>
+                        <td>{{item["name"]}}</td>
+                        <td>{{item["rate"]}}</td>
+                        <td>{{item["qty"]}}</td>
+                        <td>{{item["amount"]}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
                         <th scope="col" colspan="4">Total</th>
-                        <th scope="col">{{total["Amount"]}}</th>
+                        <th scope="col">{{total_amount}}</th>
                     </tr>
                 </tfoot>
             </table>

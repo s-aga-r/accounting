@@ -57,6 +57,7 @@
    "reqd": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "image",
    "fieldtype": "Attach Image",
    "in_preview": 1,
@@ -88,7 +89,7 @@
   }
  ],
  "links": [],
- "modified": "2021-09-20 16:43:55.488991",
+ "modified": "2021-09-21 15:20:45.682146",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
