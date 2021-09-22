@@ -1,5 +1,4 @@
 {
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "autoname": "field:user",
  "creation": "2021-09-21 11:27:50.600528",
@@ -29,7 +28,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-21 16:55:05.747466",
+ "modified": "2021-09-22 15:28:58.500347",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Cart",

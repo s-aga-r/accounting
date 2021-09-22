@@ -6,6 +6,7 @@ def get_context(context):
 
     if user == "Guest":
         frappe.local.flags.redirect_location = "/login"
+        raise frappe.Redirect
 
     if frappe.db.exists("Cart", user):
         cart = frappe.get_doc("Cart", user)
@@ -18,6 +19,7 @@ def get_context(context):
             items.append(
                 {
                     "name": item_properties.item_name,
+                    "image": item_properties.image,
                     "rate": item.rate,
                     "qty": item.qty,
                     "amount": item.amount,
