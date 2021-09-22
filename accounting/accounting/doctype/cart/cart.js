@@ -6,3 +6,17 @@ frappe.ui.form.on('Cart', {
 
 	// }
 });
+
+frappe.ui.form.on('Items', {
+	qty(frm, cdt, cdn) {
+		calculate_amount(cdt, cdn);
+	},
+	rate(frm, cdt, cdn) {
+		calculate_amount(cdt, cdn);
+	}
+});
+
+function calculate_amount(cdt, cdn) {
+	let item = frappe.get_doc(cdt, cdn);
+	item.amount = item.rate * item.qty;
+}

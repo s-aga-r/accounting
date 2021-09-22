@@ -4,5 +4,7 @@
 # import frappe
 from frappe.model.document import Document
 
+
 class Items(Document):
-	pass
+    def before_save(self):
+        self.amount = self.rate * self.qty

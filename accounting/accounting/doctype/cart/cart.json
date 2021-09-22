@@ -8,9 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "user",
-  "items",
-  "total_qty",
-  "total_amount"
+  "items"
  ],
  "fields": [
   {
@@ -27,23 +25,11 @@
    "fieldtype": "Table",
    "label": "Items",
    "options": "Items"
-  },
-  {
-   "fieldname": "total_qty",
-   "fieldtype": "Int",
-   "label": "Total Qty",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_amount",
-   "fieldtype": "Currency",
-   "label": "Total Amount",
-   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-21 11:38:54.758475",
+ "modified": "2021-09-21 16:55:05.747466",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Cart",

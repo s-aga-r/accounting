@@ -15,16 +15,15 @@ def get_context(context):
 
         for item in cart.items:
             item_properties = frappe.get_doc("Item", item.item)
-            amount = item.rate * item.qty  # Need to Implement in DocType
             items.append(
                 {
                     "name": item_properties.item_name,
                     "rate": item.rate,
                     "qty": item.qty,
-                    "amount": amount,
+                    "amount": item.amount,
                 }
             )
-            total_amount += amount
+            total_amount += item.amount
 
             context.items = items
             context.total_amount = total_amount
