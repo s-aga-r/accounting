@@ -2,6 +2,7 @@
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{party_type}-{party_name}-{#####}",
  "creation": "2021-09-16 13:33:17.944363",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -52,10 +53,12 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-17 12:06:40.704789",
+ "modified": "2021-09-22 16:53:35.132238",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Party",
+ "name_case": "UPPER CASE",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

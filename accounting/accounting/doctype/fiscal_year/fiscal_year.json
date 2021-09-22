@@ -2,6 +2,7 @@
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{year_name}-{start_date}",
  "creation": "2021-09-16 13:42:53.182314",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -36,10 +37,12 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-17 11:47:26.882186",
+ "modified": "2021-09-22 17:01:29.660829",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Fiscal Year",
+ "name_case": "UPPER CASE",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
