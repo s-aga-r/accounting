@@ -1,8 +1,6 @@
 {
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
- "allow_rename": 1,
- "autoname": "format:{item_name}-{#####}",
  "creation": "2021-09-16 13:30:00.592329",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -89,12 +87,13 @@
    "label": "Description"
   }
  ],
+ "image_field": "image",
  "links": [],
- "modified": "2021-09-22 16:57:22.607013",
+ "modified": "2021-09-24 13:34:40.296004",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
- "naming_rule": "Expression",
+ "name_case": "UPPER CASE",
  "owner": "Administrator",
  "permissions": [
   {
@@ -111,7 +110,9 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "item_code, item_name",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "item_name",
  "track_changes": 1
 }

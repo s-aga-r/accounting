@@ -1,8 +1,6 @@
 {
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
- "allow_rename": 1,
- "autoname": "format:{party_type}-{party_name}-{#####}",
  "creation": "2021-09-16 13:33:17.944363",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -53,12 +51,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-22 16:53:35.132238",
+ "modified": "2021-09-24 13:46:20.292418",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Party",
  "name_case": "UPPER CASE",
- "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -75,7 +72,9 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "party_name, email_id, mobile_number, party_type",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "party_name",
  "track_changes": 1
 }

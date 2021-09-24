@@ -1,8 +1,6 @@
 {
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
- "allow_rename": 1,
- "autoname": "format:{account_name}-{#####}",
  "creation": "2021-09-16 13:41:35.838685",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -13,11 +11,11 @@
   "opening_balance",
   "lft",
   "rgt",
-  "is_group",
   "old_parent",
-  "parent_account",
   "root_type",
-  "account_type"
+  "account_type",
+  "is_group",
+  "parent_account"
  ],
  "fields": [
   {
@@ -124,12 +122,11 @@
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2021-09-22 17:01:21.842405",
+ "modified": "2021-09-24 13:46:59.840071",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Account",
  "name_case": "UPPER CASE",
- "naming_rule": "Expression",
  "nsm_parent_field": "parent_account",
  "owner": "Administrator",
  "permissions": [
@@ -146,7 +143,9 @@
    "write": 1
   }
  ],
+ "search_fields": "account_number, account_name, parent_account",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "account_name",
  "track_changes": 1
 }

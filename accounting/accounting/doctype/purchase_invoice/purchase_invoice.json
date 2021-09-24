@@ -96,10 +96,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-17 13:47:23.298206",
+ "modified": "2021-09-24 13:49:30.288793",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Purchase Invoice",
+ "name_case": "UPPER CASE",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
@@ -116,7 +117,9 @@
    "write": 1
   }
  ],
+ "search_fields": "supplier, posting_date, payment_due_date, expense_account",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "supplier",
  "track_changes": 1
 }

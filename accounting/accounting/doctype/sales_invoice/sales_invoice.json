@@ -96,10 +96,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-22 13:15:57.480398",
+ "modified": "2021-09-24 13:48:34.729047",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",
+ "name_case": "UPPER CASE",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
@@ -117,7 +118,9 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "customer, posting_date, payment_due_date, income_account",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "customer",
  "track_changes": 1
 }

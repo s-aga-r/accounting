@@ -1,4 +1,5 @@
 {
+ "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "autoname": "ACC-GLE-.YYYY.-.#####",
  "creation": "2021-09-17 13:27:28.149492",
@@ -75,10 +76,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-17 13:27:53.983709",
+ "modified": "2021-09-24 13:45:01.176987",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "GL Entry",
+ "name_case": "UPPER CASE",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
@@ -96,7 +98,9 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "transaction_date, posting_date, account, party, fiscal_year",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "account",
  "track_changes": 1
 }

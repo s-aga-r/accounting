@@ -89,10 +89,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-17 13:47:16.071846",
+ "modified": "2021-09-24 13:51:27.309196",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Payment Entry",
+ "name_case": "UPPER CASE",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
@@ -109,7 +110,9 @@
    "write": 1
   }
  ],
+ "search_fields": "party, posting_date, payment_type, party_type, account_paid_from, account_paid_to",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "party",
  "track_changes": 1
 }
