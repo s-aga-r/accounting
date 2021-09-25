@@ -1,5 +1,6 @@
 {
- "_liked_by": "[\"Administrator\"]",
+ "_comments": "[]",
+ "_liked_by": "[]",
  "actions": [],
  "autoname": "naming_series:",
  "creation": "2021-09-16 14:42:50.125670",
@@ -96,7 +97,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-24 13:48:34.729047",
+ "modified": "2021-09-25 17:28:47.707086",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",
@@ -121,6 +122,5 @@
  "search_fields": "customer, posting_date, payment_due_date, income_account",
  "sort_field": "modified",
  "sort_order": "DESC",
- "title_field": "customer",
  "track_changes": 1
 }

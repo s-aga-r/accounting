@@ -1,12 +1,6 @@
 import frappe
 
 
-def is_logged_in():
-    if frappe.session.user == "Guest":
-        return False
-    return True
-
-
 def get_context(context):
     products = frappe.get_all(
         "Item",
@@ -21,6 +15,6 @@ def get_context(context):
     )
 
     context.products = products
-    context.is_logged_in = is_logged_in()
+    context.is_logged_in = frappe.session.user != "Guest"
 
     return context

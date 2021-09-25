@@ -8,10 +8,8 @@
  "field_order": [
   "item_code",
   "item_name",
-  "stock_uom",
   "standard_rate",
   "image",
-  "route",
   "is_active",
   "in_stock",
   "description"
@@ -48,14 +46,6 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "default": "Nos",
-   "fieldname": "stock_uom",
-   "fieldtype": "Data",
-   "label": "Default Unit of Measure",
-   "reqd": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
    "fieldname": "image",
    "fieldtype": "Attach Image",
    "in_preview": 1,
@@ -63,22 +53,19 @@
    "options": "image"
   },
   {
-   "fieldname": "route",
-   "fieldtype": "Data",
-   "label": "Route"
-  },
-  {
    "allow_in_quick_entry": 1,
-   "default": "0",
+   "default": "1",
    "fieldname": "is_active",
    "fieldtype": "Check",
-   "label": "IsActive"
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Is Active"
   },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "in_stock",
    "fieldtype": "Int",
-   "label": "InStock",
+   "label": "In Stock",
    "non_negative": 1
   },
   {
@@ -89,7 +76,7 @@
  ],
  "image_field": "image",
  "links": [],
- "modified": "2021-09-24 13:34:40.296004",
+ "modified": "2021-09-24 15:57:05.034203",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
