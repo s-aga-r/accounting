@@ -1,9 +1,8 @@
 {
- "_comments": "[]",
- "_liked_by": "[\"Administrator\"]",
  "actions": [],
+ "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2021-09-16 14:48:52.617835",
+ "creation": "2021-09-27 14:44:04.434554",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -25,7 +24,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Naming Series",
-   "options": "ACC-PINV-.YYYY.-",
+   "options": "ACC-PODR-.YYYY.-",
    "reqd": 1
   },
   {
@@ -46,6 +45,7 @@
   {
    "fieldname": "payment_due_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Payment Due Date",
    "reqd": 1
   },
@@ -75,7 +75,6 @@
   {
    "fieldname": "credit_to",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Credit To",
    "options": "Account",
    "reqd": 1
@@ -92,7 +91,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Purchase Invoice",
+   "options": "Purchase Order",
    "print_hide": 1,
    "read_only": 1
   }
@@ -100,11 +99,10 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-27 14:44:01.511584",
+ "modified": "2021-09-27 14:48:07.255150",
  "modified_by": "Administrator",
  "module": "Accounting",
- "name": "Purchase Invoice",
- "name_case": "UPPER CASE",
+ "name": "Purchase Order",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
@@ -121,7 +119,6 @@
    "write": 1
   }
  ],
- "search_fields": "supplier, posting_date, payment_due_date, expense_account",
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1

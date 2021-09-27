@@ -6,7 +6,7 @@ from frappe.model.document import Document
 from frappe.utils import getdate
 
 
-class SalesInvoice(Document):
+class SalesOrder(Document):
     def validate(self):
         if not self.validate_customer():
             frappe.throw("Select a valid Customer.")
@@ -18,13 +18,6 @@ class SalesInvoice(Document):
             frappe.throw("Debit To account should be of type Receivable.")
         if not self.validate_income_account():
             frappe.throw("Income Account parent should be of type Income.")
-
-    def on_submit(self):
-        items = self.validate_items()
-        for item_name, item_qty in items.items():
-            item = frappe.get_doc("Item", item_name)
-            item.in_stock -= item_qty
-            item.save()
 
     # Helper Method's
     def validate_customer(self):
@@ -51,7 +44,6 @@ class SalesInvoice(Document):
                     frappe.throw(
                         f"Only {item.in_stock} {item.item_name} ({item.name}) are in the stock."
                     )
-        return items
 
     def get_filtered_items(self):
         items = {}
