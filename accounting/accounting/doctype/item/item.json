@@ -67,8 +67,7 @@
    "fieldname": "in_stock",
    "fieldtype": "Int",
    "label": "In Stock",
-   "non_negative": 1,
-   "set_only_once": 1
+   "non_negative": 1
   },
   {
    "fieldname": "description",
@@ -78,7 +77,7 @@
  ],
  "image_field": "image",
  "links": [],
- "modified": "2021-09-26 20:29:14.664395",
+ "modified": "2021-09-27 17:29:41.891236",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",

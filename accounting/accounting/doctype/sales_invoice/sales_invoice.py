@@ -4,6 +4,7 @@
 import frappe
 from frappe.model.document import Document
 from frappe.utils import getdate
+from frappe.model.mapper import get_mapped_doc
 
 
 class SalesInvoice(Document):
@@ -61,3 +62,17 @@ class SalesInvoice(Document):
             else:
                 items[item.item] += item.qty
         return items
+
+
+@frappe.whitelist(allow_guest=False)
+def generate_invoice(sales_order_name):
+    s_inv = get_mapped_doc("Sales Order", sales_order_name,	{
+        "Sales Order": {
+            "doctype": "Sales Invoice",
+            "field_no_map": ["naming_series"]
+        },
+    })
+    s_inv.insert()
+    s_inv.submit()
+
+    return s_inv.name
