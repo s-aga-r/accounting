@@ -1,5 +1,6 @@
 {
- "_liked_by": "[\"Administrator\"]",
+ "_comments": "[]",
+ "_liked_by": "[]",
  "actions": [],
  "autoname": "naming_series:",
  "creation": "2021-09-16 20:09:31.071978",
@@ -51,9 +52,9 @@
   },
   {
    "fieldname": "party",
-   "fieldtype": "Dynamic Link",
+   "fieldtype": "Link",
    "label": "Party",
-   "options": "party_type",
+   "options": "Party",
    "reqd": 1
   },
   {
@@ -89,7 +90,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-24 13:51:27.309196",
+ "modified": "2021-09-27 13:31:52.027145",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Payment Entry",

@@ -25,7 +25,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Naming Series",
-   "options": "ACC-SINV-.YYYY.-\nACC-SINV-RET-.YYYY.-",
+   "options": "ACC-SINV-.YYYY.-",
    "reqd": 1
   },
   {
@@ -46,7 +46,8 @@
   {
    "fieldname": "payment_due_date",
    "fieldtype": "Date",
-   "label": "Payment Due Date"
+   "label": "Payment Due Date",
+   "reqd": 1
   },
   {
    "fieldname": "items",
@@ -97,7 +98,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-25 17:28:47.707086",
+ "modified": "2021-09-27 11:25:28.377925",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",

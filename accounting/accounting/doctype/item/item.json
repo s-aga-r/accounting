@@ -42,6 +42,7 @@
    "fieldname": "standard_rate",
    "fieldtype": "Currency",
    "label": "Standard Selling Rate",
+   "non_negative": 1,
    "precision": "2"
   },
   {
@@ -66,7 +67,8 @@
    "fieldname": "in_stock",
    "fieldtype": "Int",
    "label": "In Stock",
-   "non_negative": 1
+   "non_negative": 1,
+   "set_only_once": 1
   },
   {
    "fieldname": "description",
@@ -76,7 +78,7 @@
  ],
  "image_field": "image",
  "links": [],
- "modified": "2021-09-24 15:57:05.034203",
+ "modified": "2021-09-26 20:29:14.664395",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",

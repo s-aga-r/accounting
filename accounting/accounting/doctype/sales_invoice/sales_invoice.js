@@ -36,7 +36,7 @@ function calc_total(frm) {
 	var total_qty = 0;
 	var items = frm.doc.items;
 	items.forEach(function (item) {
-		if (typeof item.qty == "number" && typeof item.amount == "number" && item.amount > 0) {
+		if (item.item != null && typeof item.qty == "number" && typeof item.amount == "number") {
 			total_amount += item.amount;
 			total_qty += item.qty;
 		}

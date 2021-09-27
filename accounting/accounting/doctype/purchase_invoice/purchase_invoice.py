@@ -17,6 +17,14 @@ class PurchaseInvoice(Document):
         if not self.validate_expense_account():
             frappe.throw("Expense Account parent should be of type Expense.")
 
+    def on_submit(self):
+        items = self.get_filtered_items()
+        for item_name, item_qty in items.items():
+            item = frappe.get_doc("Item", item_name)
+            item.in_stock += item_qty
+            item.save()
+
+    # Helper Method's
     def validate_supplier(self):
         party = frappe.get_doc("Party", self.supplier)
         return party.party_type == "Supplier"
@@ -28,3 +36,12 @@ class PurchaseInvoice(Document):
     def validate_expense_account(self):
         account = frappe.get_doc("Account", self.expense_account)
         return account.root_type == "Expense"
+
+    def get_filtered_items(self):
+        items = {}
+        for item in self.items:
+            if item.item not in items:
+                items[item.item] = item.qty
+            else:
+                items[item.item] += item.qty
+        return items
