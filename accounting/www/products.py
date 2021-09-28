@@ -11,7 +11,6 @@ def get_context(context):
             "image",
             "in_stock",
         ],
-        filters={"is_active": True},
     )
 
     context.products = products

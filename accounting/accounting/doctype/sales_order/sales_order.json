@@ -40,7 +40,7 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Posting Date",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "payment_due_date",
@@ -99,7 +99,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-28 11:32:10.298490",
+ "modified": "2021-09-28 22:42:47.511400",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Order",

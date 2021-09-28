@@ -9,7 +9,7 @@ frappe.ui.form.on('Purchase Invoice', {
 
 frappe.ui.form.on('Items', {
 	items_remove(frm) {
-		calc_total(frm);
+		calc_grand_total(frm);
 	},
 	item(frm, cdt, cdn) {
 		calc_amount(frm, cdt, cdn);
@@ -28,10 +28,10 @@ function calc_amount(frm, cdt, cdn) {
 		item.amount = item.rate * item.qty;
 	else
 		item.rate = item.amount = 0.0;
-	calc_total(frm);
+	calc_grand_total(frm);
 }
 
-function calc_total(frm) {
+function calc_grand_total(frm) {
 	var total_amount = 0;
 	var total_qty = 0;
 	var items = frm.doc.items;

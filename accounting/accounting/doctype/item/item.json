@@ -10,7 +10,6 @@
   "item_name",
   "standard_rate",
   "image",
-  "is_active",
   "in_stock",
   "description"
  ],
@@ -55,15 +54,6 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "default": "1",
-   "fieldname": "is_active",
-   "fieldtype": "Check",
-   "in_filter": 1,
-   "in_standard_filter": 1,
-   "label": "Is Active"
-  },
-  {
-   "allow_in_quick_entry": 1,
    "fieldname": "in_stock",
    "fieldtype": "Int",
    "label": "In Stock",
@@ -77,7 +67,7 @@
  ],
  "image_field": "image",
  "links": [],
- "modified": "2021-09-27 17:29:41.891236",
+ "modified": "2021-09-28 22:35:22.768983",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",

@@ -3,21 +3,23 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import getdate
+from frappe.utils import getdate, today
+from datetime import date
 
 
 class SalesOrder(Document):
     def validate(self):
         if not self.validate_customer():
             frappe.throw("Select a valid Customer.")
-        if getdate(self.posting_date) > getdate(self.payment_due_date):
+        if getdate(self.payment_due_date) < date.today():
             frappe.throw(
-                "Posting Date should be earlier than Payment Due Date.")
+                "Payment Due Date should not be earlier than today's date.")
         self.validate_items()
         if not self.validate_debit_to():
             frappe.throw("Debit To account should be of type Receivable.")
         if not self.validate_income_account():
             frappe.throw("Income Account parent should be of type Income.")
+        self.posting_date = today()
 
     # Helper Method's
     def validate_customer(self):

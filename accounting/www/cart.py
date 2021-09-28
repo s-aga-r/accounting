@@ -16,17 +16,16 @@ def get_context(context):
 
         for cart_item in cart.items:
             item = frappe.get_doc("Item", cart_item.item)
-            if item.is_active:
-                items.append(
-                    {
-                        "name": item.item_name,
-                        "image": item.image,
-                        "rate": cart_item.rate,
-                        "qty": cart_item.qty,
-                        "amount": cart_item.amount,
-                    }
-                )
-                total_amount += cart_item.amount
+            items.append(
+                {
+                    "name": item.item_name,
+                    "image": item.image,
+                    "rate": cart_item.rate,
+                    "qty": cart_item.qty,
+                    "amount": cart_item.amount,
+                }
+            )
+            total_amount += cart_item.amount
 
         context.items = items
         context.total_amount = total_amount

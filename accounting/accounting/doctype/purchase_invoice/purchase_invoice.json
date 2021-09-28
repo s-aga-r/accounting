@@ -41,7 +41,7 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Posting Date",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "payment_due_date",
@@ -101,7 +101,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-28 13:34:30.132678",
+ "modified": "2021-09-28 22:43:33.731610",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Purchase Invoice",
