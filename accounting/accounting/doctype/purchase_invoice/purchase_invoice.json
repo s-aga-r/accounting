@@ -97,10 +97,11 @@
    "read_only": 1
   }
  ],
+ "in_create": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-27 14:44:01.511584",
+ "modified": "2021-09-28 13:34:30.132678",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Purchase Invoice",

@@ -97,10 +97,11 @@
    "read_only": 1
   }
  ],
+ "in_create": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-27 14:45:35.480382",
+ "modified": "2021-09-28 13:34:07.062740",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",

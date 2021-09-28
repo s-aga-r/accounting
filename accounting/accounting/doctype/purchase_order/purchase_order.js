@@ -3,17 +3,19 @@
 
 frappe.ui.form.on('Purchase Order', {
 	refresh: function (frm) {
-		frm.add_custom_button('Generate Invoice', () => {
-			frappe.call({
-				method: "accounting.accounting.doctype.purchase_invoice.purchase_invoice.generate_invoice",
-				args: {
-					'purchase_order_name': frm.doc.name
-				},
-				callback: function (result) {
-					frappe.msgprint("Invoice No : " + result.message)
-				}
+		if (frm.doc.docstatus == 1) {
+			frm.add_custom_button('Generate Invoice', () => {
+				frappe.call({
+					method: "accounting.accounting.doctype.purchase_invoice.purchase_invoice.generate_invoice",
+					args: {
+						'purchase_order_name': frm.doc.name
+					},
+					callback: function (result) {
+						frappe.msgprint(result.message)
+					}
+				})
 			})
-		})
+		}
 	}
 });
 

@@ -1,6 +1,6 @@
 {
+ "_liked_by": "[\"Administrator\"]",
  "actions": [],
- "allow_rename": 1,
  "autoname": "naming_series:",
  "creation": "2021-09-27 14:28:39.744786",
  "doctype": "DocType",
@@ -99,7 +99,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-27 14:47:53.153835",
+ "modified": "2021-09-28 11:32:10.298490",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Order",
@@ -120,6 +120,7 @@
    "write": 1
   }
  ],
+ "search_fields": "customer, posting_date, payment_due_date, income_account",
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1
