@@ -1,6 +1,7 @@
 # Copyright (c) 2021, Sagar Sharma and contributors
 # For license information, please see license.txt
 
+from accounting.accounting.doctype.account.account import Account
 from accounting.accounting.doctype.general_ledger.general_ledger import GeneralLedger
 import frappe
 from frappe.model.document import Document
@@ -20,11 +21,21 @@ class PurchaseInvoice(Document):
             frappe.throw("Credit To account should be of type Payable.")
         if not self.validate_expense_account():
             frappe.throw("Expense Account parent should be of type Expense.")
+        if Account.get_balance(self.credit_to) < self.total_amount:
+            frappe.throw("Insufficient funds in Credit Account.")
         self.posting_date = today()
 
     def on_submit(self):
-        self.update_stock()
+        Account.transfer_amount(
+            self.credit_to, self.expense_account, self.total_amount)
+        self.update_stock("increase")
         self.make_gl_entries()
+
+    def on_cancel(self):
+        Account.transfer_amount(
+            self.expense_account, self.credit_to, self.total_amount)
+        self.update_stock("decrease")
+        self.make_gl_entries(reverse=True)
 
     # Helper Method's
     def validate_supplier(self):
@@ -48,16 +59,26 @@ class PurchaseInvoice(Document):
                 items[item.item] += item.qty
         return items
 
-    def update_stock(self):
+    def update_stock(self, operation):
         items = self.get_filtered_items()
-        for item_name, item_qty in items.items():
-            item = frappe.get_doc("Item", item_name)
-            item.in_stock += item_qty
-            item.save()
+        if operation == "decrease":
+            for item_name, item_qty in items.items():
+                item = frappe.get_doc("Item", item_name)
+                item.in_stock -= item_qty
+                item.save()
+        elif operation == "increase":
+            for item_name, item_qty in items.items():
+                item = frappe.get_doc("Item", item_name)
+                item.in_stock += item_qty
+                item.save()
 
-    def make_gl_entries(self):
-        GeneralLedger.generate_gl_entries(debit_account=self.expense_account, credit_account=self.credit_to, transaction_type="Purchase Invoice",
-                                          transaction_no=self.name, party_type="Supplier", party=self.supplier, amount=self.total_amount)
+    def make_gl_entries(self, reverse=False):
+        if reverse:
+            GeneralLedger.generate_gl_entries(debit_account=self.credit_to, credit_account=self.expense_account, transaction_type="Purchase Invoice",
+                                              transaction_no=self.name, party_type="Supplier", party=self.supplier, amount=self.total_amount)
+        else:
+            GeneralLedger.generate_gl_entries(debit_account=self.expense_account, credit_account=self.credit_to, transaction_type="Purchase Invoice",
+                                              transaction_no=self.name, party_type="Supplier", party=self.supplier, amount=self.total_amount)
 
 
 @frappe.whitelist(allow_guest=False)

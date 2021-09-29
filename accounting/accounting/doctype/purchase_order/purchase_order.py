@@ -1,6 +1,7 @@
 # Copyright (c) 2021, Sagar Sharma and contributors
 # For license information, please see license.txt
 
+from accounting.accounting.doctype.account.account import Account
 import frappe
 from frappe.model.document import Document
 from frappe.utils import getdate, today
@@ -18,6 +19,8 @@ class PurchaseOrder(Document):
             frappe.throw("Credit To account should be of type Payable.")
         if not self.validate_expense_account():
             frappe.throw("Expense Account parent should be of type Expense.")
+        if Account.get_balance(self.credit_to) < self.total_amount:
+            frappe.throw("Insufficient funds in Credit Account.")
         self.posting_date = today()
 
     # Helper Method's

@@ -9,7 +9,7 @@
  "field_order": [
   "account_number",
   "account_name",
-  "opening_balance",
+  "balance",
   "lft",
   "rgt",
   "old_parent",
@@ -67,14 +67,6 @@
    "reqd": 1
   },
   {
-   "allow_in_quick_entry": 1,
-   "default": "0.0",
-   "fieldname": "opening_balance",
-   "fieldtype": "Currency",
-   "label": "Opening Balance",
-   "set_only_once": 1
-  },
-  {
    "fieldname": "lft",
    "fieldtype": "Int",
    "hidden": 1,
@@ -126,12 +118,19 @@
    "label": "Root Type",
    "options": "\nAsset\nLiability\nIncome\nExpense\nEquity",
    "read_only": 1
+  },
+  {
+   "default": "0.0",
+   "fieldname": "balance",
+   "fieldtype": "Currency",
+   "label": "Balance",
+   "precision": "2"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2021-09-24 17:02:00.253131",
+ "modified": "2021-09-29 15:44:52.907329",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Account",

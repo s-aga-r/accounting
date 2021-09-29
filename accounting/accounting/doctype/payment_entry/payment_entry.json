@@ -32,7 +32,7 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Posting Date ",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "payment_type",
@@ -90,7 +90,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-27 13:31:52.027145",
+ "modified": "2021-09-29 12:05:13.217676",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Payment Entry",
@@ -114,6 +114,5 @@
  "search_fields": "party, posting_date, payment_type, party_type, account_paid_from, account_paid_to",
  "sort_field": "modified",
  "sort_order": "DESC",
- "title_field": "party",
  "track_changes": 1
 }

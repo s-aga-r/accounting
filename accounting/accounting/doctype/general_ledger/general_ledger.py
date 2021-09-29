@@ -1,6 +1,7 @@
 # Copyright (c) 2021, Sagar Sharma and contributors
 # For license information, please see license.txt
 
+from accounting.accounting.doctype.account.account import Account
 import frappe
 from frappe.model.document import Document
 from frappe.utils import today
@@ -21,6 +22,7 @@ class GeneralLedger(Document):
         credit_gl.party = party
         credit_gl.debit_amount = 0.0
         credit_gl.credit_amount = amount
+        credit_gl.account_balance = Account.get_balance(credit_account)
         credit_gl.voucher_no = voucher_no
         credit_gl.fiscal_year = FiscalYear.get_current_fiscal_year()
         credit_gl.against_account = debit_account
@@ -36,6 +38,7 @@ class GeneralLedger(Document):
         debit_gl.party = party
         debit_gl.debit_amount = amount
         debit_gl.credit_amount = 0.0
+        debit_gl.account_balance = Account.get_balance(debit_account)
         debit_gl.voucher_no = voucher_no
         debit_gl.fiscal_year = FiscalYear.get_current_fiscal_year()
         debit_gl.against_account = credit_account

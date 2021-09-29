@@ -1,127 +1,127 @@
 {
- "_liked_by": "[\"Administrator\"]",
- "actions": [],
- "autoname": "naming_series:",
- "creation": "2021-09-27 14:28:39.744786",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "naming_series",
-  "customer",
-  "posting_date",
-  "payment_due_date",
-  "items",
-  "total_qty",
-  "total_amount",
-  "debit_to",
-  "income_account",
-  "amended_from"
- ],
- "fields": [
-  {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Naming Series",
-   "options": "ACC-SODR-.YYYY.-",
-   "reqd": 1
-  },
-  {
-   "fieldname": "customer",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Customer",
-   "options": "Party",
-   "reqd": 1
-  },
-  {
-   "fieldname": "posting_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Posting Date",
-   "read_only": 1
-  },
-  {
-   "fieldname": "payment_due_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Payment Due Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "items",
-   "fieldtype": "Table",
-   "label": "Items",
-   "options": "Items",
-   "reqd": 1
-  },
-  {
-   "fieldname": "total_qty",
-   "fieldtype": "Int",
-   "label": "Total Qty",
-   "non_negative": 1,
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "total_amount",
-   "fieldtype": "Currency",
-   "label": "Total Amount",
-   "non_negative": 1,
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "debit_to",
-   "fieldtype": "Link",
-   "label": "Debit To",
-   "options": "Account",
-   "reqd": 1
-  },
-  {
-   "fieldname": "income_account",
-   "fieldtype": "Link",
-   "label": "Income Account",
-   "options": "Account",
-   "reqd": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sales Order",
-   "print_hide": 1,
-   "read_only": 1
-  }
- ],
- "index_web_pages_for_search": 1,
- "is_submittable": 1,
- "links": [],
- "modified": "2021-09-28 22:42:47.511400",
- "modified_by": "Administrator",
- "module": "Accounting",
- "name": "Sales Order",
- "name_case": "UPPER CASE",
- "naming_rule": "By \"Naming Series\" field",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "search_fields": "customer, posting_date, payment_due_date, income_account",
- "sort_field": "modified",
- "sort_order": "DESC",
- "track_changes": 1
+    "_liked_by": "[\"Administrator\"]",
+    "actions": [],
+    "autoname": "naming_series:",
+    "creation": "2021-09-27 14:28:39.744786",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "naming_series",
+        "customer",
+        "posting_date",
+        "payment_due_date",
+        "items",
+        "total_qty",
+        "total_amount",
+        "debit_to",
+        "income_account",
+        "amended_from"
+    ],
+    "fields": [
+        {
+            "fieldname": "naming_series",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Naming Series",
+            "options": "ACC-SODR-.YYYY.-",
+            "reqd": 1
+        },
+        {
+            "fieldname": "customer",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Customer",
+            "options": "Party",
+            "reqd": 1
+        },
+        {
+            "fieldname": "posting_date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "label": "Posting Date",
+            "read_only": 1
+        },
+        {
+            "fieldname": "payment_due_date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "label": "Payment Due Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "items",
+            "fieldtype": "Table",
+            "label": "Items",
+            "options": "Items",
+            "reqd": 1
+        },
+        {
+            "fieldname": "total_qty",
+            "fieldtype": "Int",
+            "label": "Total Qty",
+            "non_negative": 1,
+            "read_only": 1,
+            "reqd": 1
+        },
+        {
+            "fieldname": "total_amount",
+            "fieldtype": "Currency",
+            "label": "Total Amount",
+            "non_negative": 1,
+            "read_only": 1,
+            "reqd": 1
+        },
+        {
+            "fieldname": "debit_to",
+            "fieldtype": "Link",
+            "label": "Debit To",
+            "options": "Account",
+            "reqd": 1
+        },
+        {
+            "fieldname": "income_account",
+            "fieldtype": "Link",
+            "label": "Income Account",
+            "options": "Account",
+            "reqd": 1
+        },
+        {
+            "fieldname": "amended_from",
+            "fieldtype": "Link",
+            "label": "Amended From",
+            "no_copy": 1,
+            "options": "Sales Order",
+            "print_hide": 1,
+            "read_only": 1
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2021-09-29 11:17:58.852193",
+    "modified_by": "Administrator",
+    "module": "Accounting",
+    "name": "Sales Order",
+    "name_case": "UPPER CASE",
+    "naming_rule": "By \"Naming Series\" field",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "search_fields": "customer, posting_date, payment_due_date, income_account",
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "track_changes": 1
 }

@@ -1,6 +1,7 @@
 # Copyright (c) 2021, Sagar Sharma and contributors
 # For license information, please see license.txt
 
+from accounting.accounting.doctype.account.account import Account
 import frappe
 from frappe.model.document import Document
 from frappe.utils import getdate, today
@@ -19,6 +20,8 @@ class SalesOrder(Document):
             frappe.throw("Debit To account should be of type Receivable.")
         if not self.validate_income_account():
             frappe.throw("Income Account parent should be of type Income.")
+        if Account.get_balance(self.income_account) < self.total_amount:
+            frappe.throw("Insufficient funds in Income Account.")
         self.posting_date = today()
 
     # Helper Method's
