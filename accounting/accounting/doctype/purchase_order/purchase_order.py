@@ -1,37 +1,25 @@
 # Copyright (c) 2021, Sagar Sharma and contributors
 # For license information, please see license.txt
 
-from accounting.accounting.doctype.account.account import Account
 import frappe
-from frappe.model.document import Document
-from frappe.utils import getdate, today
 from datetime import date
+from frappe.utils import getdate, today
+from frappe.model.document import Document
+from accounting.accounting.doctype.party.party import Party
+from accounting.accounting.doctype.account.account import Account
 
 
 class PurchaseOrder(Document):
     def validate(self):
-        if not self.validate_supplier():
+        if Party.get_type(self.supplier) != "Supplier":
             frappe.throw("Select a valid Supplier.")
         if getdate(self.payment_due_date) < date.today():
             frappe.throw(
                 "Payment Due Date should not be earlier than today's date.")
-        if not self.validate_credit_to():
+        if Account.get_type(self.credit_to) != "Payable":
             frappe.throw("Credit To account should be of type Payable.")
-        if not self.validate_expense_account():
+        if Account.get_root_type(self.expense_account) != "Expense":
             frappe.throw("Expense Account parent should be of type Expense.")
         if Account.get_balance(self.credit_to) < self.total_amount:
             frappe.throw("Insufficient funds in Credit Account.")
         self.posting_date = today()
-
-    # Helper Method's
-    def validate_supplier(self):
-        party = frappe.get_doc("Party", self.supplier)
-        return party.party_type == "Supplier"
-
-    def validate_credit_to(self):
-        account = frappe.get_doc("Account", self.credit_to)
-        return account.account_type == "Payable"
-
-    def validate_expense_account(self):
-        account = frappe.get_doc("Account", self.expense_account)
-        return account.root_type == "Expense"

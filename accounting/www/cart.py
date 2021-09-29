@@ -4,6 +4,7 @@ import frappe
 def get_context(context):
     user = frappe.session.user
 
+    # Redirect anonymous user to login page.
     if user == "Guest":
         frappe.local.flags.redirect_location = "/login"
         raise frappe.Redirect

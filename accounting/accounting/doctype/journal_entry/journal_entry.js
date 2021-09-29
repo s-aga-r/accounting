@@ -9,17 +9,17 @@ frappe.ui.form.on('Journal Entry', {
 
 frappe.ui.form.on('Accounting Entries', {
 	accounting_entries_remove(frm) {
-		calc_total(frm);
+		calc_grand_total(frm);
 	},
 	debit(frm) {
-		calc_total(frm);
+		calc_grand_total(frm);
 	},
 	credit(frm) {
-		calc_total(frm);
+		calc_grand_total(frm);
 	}
 });
 
-function calc_total(frm) {
+function calc_grand_total(frm) {
 	var total_debit = 0;
 	var total_credit = 0;
 	var acc_entries = frm.doc.accounting_entries;

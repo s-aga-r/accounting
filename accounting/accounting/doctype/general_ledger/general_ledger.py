@@ -1,17 +1,16 @@
 # Copyright (c) 2021, Sagar Sharma and contributors
 # For license information, please see license.txt
 
-from accounting.accounting.doctype.account.account import Account
 import frappe
-from frappe.model.document import Document
 from frappe.utils import today
+from frappe.model.document import Document
+from accounting.accounting.doctype.account.account import Account
 from accounting.accounting.doctype.fiscal_year.fiscal_year import FiscalYear
 
 
 class GeneralLedger(Document):
     @staticmethod
-    def generate_gl_entries(debit_account, credit_account, transaction_type, transaction_no, party_type, party, amount, voucher_no=None):
-
+    def generate_entries(debit_account, credit_account, transaction_type, transaction_no, party_type, party, amount, voucher_no=None):
         # Credit
         credit_gl = frappe.new_doc("General Ledger")
         credit_gl.posting_date = today()
@@ -27,7 +26,6 @@ class GeneralLedger(Document):
         credit_gl.fiscal_year = FiscalYear.get_current_fiscal_year()
         credit_gl.against_account = debit_account
         credit_gl.submit()
-
         # Debit
         debit_gl = frappe.new_doc("General Ledger")
         debit_gl.posting_date = today()
