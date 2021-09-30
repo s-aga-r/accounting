@@ -19,33 +19,44 @@ class PurchaseInvoice(Document):
         if getdate(self.payment_due_date) < date.today():
             frappe.throw(
                 "Payment Due Date should not be earlier than today's date.")
-        if Account.get_type(self.credit_to) != "Payable":
-            frappe.throw("Credit To account should be of type Payable.")
-        if Account.get_root_type(self.expense_account) != "Expense":
-            frappe.throw("Expense Account parent should be of type Expense.")
+        if Account.get_parent_account(self.credit_to) != "Accounts Payable":
+            frappe.throw(
+                "Credit account parent should be of type Accounts Payable.")
+        if not self.validate_asset_account():
+            frappe.throw(
+                "Asset account parent should be of type Stock Assets or Stock Liabilities.")
         if Account.get_balance(self.credit_to) < self.total_amount:
             frappe.throw("Insufficient funds in Credit Account.")
         self.posting_date = today()
 
     def on_submit(self):
         Account.transfer_amount(
-            self.credit_to, self.expense_account, self.total_amount)
+            self.credit_to, self.asset_account, self.total_amount)
         Item.update_stock(self.items, "increase")
         self.make_gl_entries()
 
     def on_cancel(self):
         Account.transfer_amount(
-            self.expense_account, self.credit_to, self.total_amount)
+            self.asset_account, self.credit_to, self.total_amount)
         Item.update_stock(self.items, "decrease")
         self.make_gl_entries(reverse=True)
 
-    # Helper Method
+    # Helper Method's
+
+    @staticmethod
+    def get_billed_amount(purchase_invoice):
+        return frappe.db.get_value("Purchase Invoice", purchase_invoice, "total_amount")
+
+    def validate_asset_account(self):
+        parent_account = Account.get_parent_account(self.asset_account)
+        return parent_account == "Stock Assets" or parent_account == "Stock Liabilities"
+
     def make_gl_entries(self, reverse=False):
         if reverse:
-            GeneralLedger.generate_entries(debit_account=self.credit_to, credit_account=self.expense_account, transaction_type="Purchase Invoice",
+            GeneralLedger.generate_entries(debit_account=self.credit_to, credit_account=self.asset_account, transaction_type="Purchase Invoice",
                                            transaction_no=self.name, party_type="Supplier", party=self.supplier, amount=self.total_amount)
         else:
-            GeneralLedger.generate_entries(debit_account=self.expense_account, credit_account=self.credit_to, transaction_type="Purchase Invoice",
+            GeneralLedger.generate_entries(debit_account=self.asset_account, credit_account=self.credit_to, transaction_type="Purchase Invoice",
                                            transaction_no=self.name, party_type="Supplier", party=self.supplier, amount=self.total_amount)
 
 

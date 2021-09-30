@@ -67,7 +67,7 @@
  ],
  "image_field": "image",
  "links": [],
- "modified": "2021-09-28 22:35:22.768983",
+ "modified": "2021-09-30 10:19:10.356631",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
@@ -88,7 +88,7 @@
   }
  ],
  "quick_entry": 1,
- "search_fields": "item_code, item_name",
+ "search_fields": "item_code, item_name, in_stock",
  "sort_field": "modified",
  "sort_order": "DESC",
  "title_field": "item_name",

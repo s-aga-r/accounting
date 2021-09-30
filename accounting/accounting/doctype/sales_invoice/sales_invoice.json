@@ -16,7 +16,7 @@
   "total_qty",
   "total_amount",
   "debit_to",
-  "income_account",
+  "asset_account",
   "amended_from"
  ],
  "fields": [
@@ -81,13 +81,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "income_account",
-   "fieldtype": "Link",
-   "label": "Income Account",
-   "options": "Account",
-   "reqd": 1
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -95,13 +88,20 @@
    "options": "Sales Invoice",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "asset_account",
+   "fieldtype": "Link",
+   "label": "Asset Account",
+   "options": "Account",
+   "reqd": 1
   }
  ],
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-28 22:42:57.280032",
+ "modified": "2021-09-30 13:36:11.871188",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",
@@ -122,7 +122,7 @@
    "write": 1
   }
  ],
- "search_fields": "customer, posting_date, payment_due_date, income_account",
+ "search_fields": "customer, posting_date, payment_due_date, asset_account",
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1

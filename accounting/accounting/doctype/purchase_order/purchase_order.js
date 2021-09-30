@@ -1,14 +1,14 @@
 // Copyright (c) 2021, Sagar Sharma and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Purchase Order', {
+frappe.ui.form.on("Purchase Order", {
 	refresh: function (frm) {
 		if (frm.doc.docstatus == 1) {
-			frm.add_custom_button('Generate Invoice', () => {
+			frm.add_custom_button("Generate Invoice", () => {
 				frappe.call({
 					method: "accounting.accounting.doctype.purchase_invoice.purchase_invoice.generate_invoice",
 					args: {
-						'purchase_order_name': frm.doc.name
+						"purchase_order_name": frm.doc.name
 					},
 					callback: function (result) {
 						frappe.msgprint(result.message)
@@ -16,10 +16,32 @@ frappe.ui.form.on('Purchase Order', {
 				})
 			})
 		}
+		frm.set_query("supplier", function () {
+			return {
+				filters: {
+					party_type: "Supplier"
+				}
+			};
+		});
+		frm.set_query("credit_to", function () {
+			return {
+				filters: {
+					parent_account: "Accounts Payable"
+				}
+			}
+		});
+		frm.set_query("asset_account", function () {
+			return {
+				filters: {
+					parent_account: ["in", ["Stock Assets", "Stock Liabilities"]]
+				}
+			}
+		});
+		frm.set_value("payment_due_date", frappe.datetime.now_date());
 	}
 });
 
-frappe.ui.form.on('Items', {
+frappe.ui.form.on("Items", {
 	items_remove(frm) {
 		calc_grand_total(frm);
 	},
@@ -56,5 +78,5 @@ function calc_grand_total(frm) {
 	frm.set_value({
 		total_amount: total_amount,
 		total_qty: total_qty
-	})
+	});
 }

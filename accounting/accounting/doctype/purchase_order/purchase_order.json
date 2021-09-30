@@ -15,7 +15,7 @@
   "total_qty",
   "total_amount",
   "credit_to",
-  "expense_account",
+  "asset_account",
   "amended_from"
  ],
  "fields": [
@@ -80,13 +80,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "expense_account",
-   "fieldtype": "Link",
-   "label": "Expense Account",
-   "options": "Account",
-   "reqd": 1
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -94,12 +87,19 @@
    "options": "Purchase Order",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "asset_account",
+   "fieldtype": "Link",
+   "label": "Asset Account",
+   "options": "Account",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-28 22:44:25.510582",
+ "modified": "2021-09-30 13:46:21.225543",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Purchase Order",
@@ -120,7 +120,7 @@
    "write": 1
   }
  ],
- "search_fields": "supplier, posting_date, payment_due_date, expense_account",
+ "search_fields": "supplier, posting_date, payment_due_date, asset_account",
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1

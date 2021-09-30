@@ -1,6 +1,6 @@
 {
  "_comments": "[]",
- "_liked_by": "[]",
+ "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "autoname": "naming_series:",
  "creation": "2021-09-16 20:09:31.071978",
@@ -10,9 +10,11 @@
  "field_order": [
   "naming_series",
   "posting_date",
-  "payment_type",
+  "reference",
+  "reference_name",
   "party_type",
   "party",
+  "payment_type",
   "account_paid_from",
   "account_paid_to",
   "amount",
@@ -48,6 +50,7 @@
    "in_list_view": 1,
    "label": "Party Type",
    "options": "Customer\nSupplier",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -85,12 +88,26 @@
    "options": "Payment Entry",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Link",
+   "label": "Reference",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference Name",
+   "options": "reference",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-29 12:05:13.217676",
+ "modified": "2021-09-30 12:36:48.206701",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Payment Entry",

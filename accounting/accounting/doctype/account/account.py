@@ -15,6 +15,10 @@ class Account(NestedSet):
         return frappe.db.get_value("Account", account_name, "root_type")
 
     @staticmethod
+    def get_parent_account(account_name):
+        return frappe.db.get_value("Account", account_name, "parent_account")
+
+    @staticmethod
     def get_balance(account_name):
         return frappe.db.get_value("Account", account_name, "balance")
 

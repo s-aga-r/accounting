@@ -19,34 +19,45 @@ class SalesInvoice(Document):
         if getdate(self.payment_due_date) < date.today():
             frappe.throw(
                 "Payment Due Date should not be earlier than today's date.")
-        if Account.get_type(self.debit_to) != "Receivable":
-            frappe.throw("Debit To account should be of type Receivable.")
-        if Account.get_root_type(self.income_account) != "Income":
-            frappe.throw("Income Account parent should be of type Income.")
-        if Account.get_balance(self.income_account) < self.total_amount:
-            frappe.throw("Insufficient funds in Income Account.")
+        if Account.get_parent_account(self.debit_to) != "Accounts Receivable":
+            frappe.throw(
+                "Debit account parent should be of type Accounts Receivable.")
+        if not self.validate_asset_account():
+            frappe.throw(
+                "Asset account parent should be of type Stock Assets or Fixed Assets.")
+        if Account.get_balance(self.asset_account) < self.total_amount:
+            frappe.throw("Insufficient funds in Asset Account.")
         Item.are_items_available(self.items)
         self.posting_date = today()
 
     def on_submit(self):
         Account.transfer_amount(
-            self.income_account, self.debit_to, self.total_amount)
+            self.asset_account, self.debit_to, self.total_amount)
         Item.update_stock(self.items, "decrease")
         self.make_gl_entries()
 
     def on_cancel(self):
         Account.transfer_amount(
-            self.debit_to, self.income_account, self.total_amount)
+            self.debit_to, self.asset_account, self.total_amount)
         Item.update_stock(self.items, "increase")
         self.make_gl_entries(reverse=True)
 
-    # Helper Method
+    # Helper Method's
+
+    @staticmethod
+    def get_billed_amount(sales_invoice):
+        return frappe.db.get_value("Sales Invoice", sales_invoice, "total_amount")
+
+    def validate_asset_account(self):
+        parent_account = Account.get_parent_account(self.asset_account)
+        return parent_account == "Stock Assets" or parent_account == "Fixed Assets"
+
     def make_gl_entries(self, reverse=False):
         if reverse:
-            GeneralLedger.generate_entries(debit_account=self.income_account, credit_account=self.debit_to, transaction_type="Sales Invoice",
+            GeneralLedger.generate_entries(debit_account=self.asset_account, credit_account=self.debit_to, transaction_type="Sales Invoice",
                                            transaction_no=self.name, party_type="Customer", party=self.customer, amount=self.total_amount)
         else:
-            GeneralLedger.generate_entries(debit_account=self.debit_to, credit_account=self.income_account, transaction_type="Sales Invoice",
+            GeneralLedger.generate_entries(debit_account=self.debit_to, credit_account=self.asset_account, transaction_type="Sales Invoice",
                                            transaction_no=self.name, party_type="Customer", party=self.customer, amount=self.total_amount)
 
 

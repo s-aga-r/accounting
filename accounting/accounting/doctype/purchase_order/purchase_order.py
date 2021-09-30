@@ -16,10 +16,17 @@ class PurchaseOrder(Document):
         if getdate(self.payment_due_date) < date.today():
             frappe.throw(
                 "Payment Due Date should not be earlier than today's date.")
-        if Account.get_type(self.credit_to) != "Payable":
-            frappe.throw("Credit To account should be of type Payable.")
-        if Account.get_root_type(self.expense_account) != "Expense":
-            frappe.throw("Expense Account parent should be of type Expense.")
+        if Account.get_parent_account(self.credit_to) != "Accounts Payable":
+            frappe.throw(
+                "Credit account parent should be of type Accounts Payable.")
+        if not self.validate_asset_account():
+            frappe.throw(
+                "Asset account parent should be of type Stock Assets or Stock Liabilities.")
         if Account.get_balance(self.credit_to) < self.total_amount:
             frappe.throw("Insufficient funds in Credit Account.")
         self.posting_date = today()
+
+    # Helper Method
+    def validate_asset_account(self):
+        parent_account = Account.get_parent_account(self.asset_account)
+        return parent_account == "Stock Assets" or parent_account == "Stock Liabilities"
