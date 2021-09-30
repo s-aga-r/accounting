@@ -4,16 +4,20 @@
 frappe.ui.form.on("Payment Entry", {
 	reference(frm) {
 		if (frm.doc.reference == "Sales Invoice") {
-			frm.set_value("payment_type", "Receive");
-			frm.set_value("party_type", "Customer");
-			frm.set_value("account_paid_from", "Debtors");
-			frm.set_value("account_paid_to", "Cash");
+			frm.set_value({
+				party_type: "Customer",
+				payment_type: "Receive",
+				account_paid_from: "Debtors",
+				account_paid_to: "Cash"
+			});
 		}
 		else if (frm.doc.reference == "Purchase Invoice") {
-			frm.set_value("payment_type", "Pay");
-			frm.set_value("party_type", "Supplier");
-			frm.set_value("account_paid_from", "Cash");
-			frm.set_value("account_paid_to", "Creditors");
+			frm.set_value({
+				party_type: "Supplier",
+				payment_type: "Pay",
+				account_paid_from: "Cash",
+				account_paid_to: "Creditors"
+			});
 		}
 	},
 	refresh: function (frm) {
