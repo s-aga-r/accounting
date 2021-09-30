@@ -7,14 +7,6 @@ from frappe.utils.nestedset import NestedSet
 
 class Account(NestedSet):
     @staticmethod
-    def get_type(account_name):
-        return frappe.db.get_value("Account", account_name, "account_type")
-
-    @staticmethod
-    def get_root_type(account_name):
-        return frappe.db.get_value("Account", account_name, "root_type")
-
-    @staticmethod
     def get_parent_account(account_name):
         return frappe.db.get_value("Account", account_name, "parent_account")
 
@@ -24,6 +16,9 @@ class Account(NestedSet):
 
     @staticmethod
     def transfer_amount(from_account, to_account_name, amount):
+        if from_account == to_account_name:
+            frappe.throw("Debit and Credit Account should not be same.")
+
         from_account = frappe.get_doc("Account", from_account)
 
         if from_account.balance >= amount:
@@ -35,3 +30,10 @@ class Account(NestedSet):
         else:
             frappe.throw(
                 f"Insufficient funds in '{from_account.account_name}' Account.")
+
+    @staticmethod
+    def transfer_amount_journal_entry(account_name, credit, debit):
+        account = frappe.get_doc("Account", account_name)
+        account.balance -= credit
+        account.balance += debit
+        account.save()

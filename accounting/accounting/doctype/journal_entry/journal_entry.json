@@ -1,4 +1,5 @@
 {
+ "_comments": "[]",
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "autoname": "naming_series:",
@@ -8,7 +9,6 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "party",
   "posting_date",
   "accounting_entries",
   "total_debit",
@@ -20,25 +20,17 @@
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Naming Series",
-   "options": "ACC-JV-.YYYY.-",
-   "reqd": 1
-  },
-  {
-   "fieldname": "party",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Party",
-   "options": "Party",
-   "reqd": 1
+   "options": "ACC-JV-.YYYY.-"
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Posting Date",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "accounting_entries",
@@ -78,7 +70,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-24 13:50:10.959412",
+ "modified": "2021-09-30 18:21:05.014439",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Journal Entry",
@@ -99,9 +91,8 @@
    "write": 1
   }
  ],
- "search_fields": "party, posting_date",
+ "search_fields": "posting_date",
  "sort_field": "modified",
  "sort_order": "DESC",
- "title_field": "party",
  "track_changes": 1
 }

@@ -24,10 +24,10 @@
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Naming Series",
-   "options": "ACC-PAY-.YYYY.-",
-   "reqd": 1
+   "options": "ACC-PAY-.YYYY.-"
   },
   {
    "fieldname": "posting_date",
@@ -107,7 +107,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-30 12:36:48.206701",
+ "modified": "2021-09-30 18:21:51.428592",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Payment Entry",
