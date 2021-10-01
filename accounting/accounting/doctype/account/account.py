@@ -37,3 +37,17 @@ class Account(NestedSet):
         account.balance -= credit
         account.balance += debit
         account.save()
+
+    @staticmethod
+    def create(account_name, root_type, account_number=None, balance=0.0, parent_account=None, account_type=None, is_group=0):
+        account = frappe.new_doc("Account")
+        account.account_number = account_number
+        account.account_name = account_name
+        account.balance = balance
+        account.parent_account = parent_account
+        account.root_type = root_type
+        account.account_type = account_type
+        account.is_group = is_group
+        account.flags.ignore_mandatory = True
+        account.flags.ignore_permissions = True
+        account.insert()
