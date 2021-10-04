@@ -48,6 +48,21 @@ class SalesInvoice(Document):
     def get_billed_amount(sales_invoice):
         return frappe.db.get_value("Sales Invoice", sales_invoice, "total_amount")
 
+    @staticmethod
+    def generate(sales_order_name):
+        sales_odr = frappe.get_doc("Sales Order", sales_order_name)
+        if sales_odr.docstatus == 1:
+            sales_inv = get_mapped_doc("Sales Order", sales_order_name,	{
+                "Sales Order": {
+                    "doctype": "Sales Invoice",
+                    "field_no_map": ["naming_series", "posting_date"]
+                }
+            }, ignore_permissions=True)
+            sales_inv.flags.ignore_permissions = True
+            sales_inv.submit()
+            return "Invoice No : " + sales_inv.name
+        return "Submit the form before generating the invoice."
+
     def validate_asset_account(self):
         parent_account = Account.get_parent_account(self.asset_account)
         return parent_account == "Stock Assets" or parent_account == "Fixed Assets"
@@ -63,14 +78,4 @@ class SalesInvoice(Document):
 
 @frappe.whitelist(allow_guest=False)
 def generate_invoice(sales_order_name):
-    sales_odr = frappe.get_doc("Sales Order", sales_order_name)
-    if sales_odr.docstatus == 1:
-        sales_inv = get_mapped_doc("Sales Order", sales_order_name,	{
-            "Sales Order": {
-                "doctype": "Sales Invoice",
-                "field_no_map": ["naming_series", "posting_date"]
-            },
-        })
-        sales_inv.submit()
-        return "Invoice No : " + sales_inv.name
-    return "Submit the form before generating the invoice."
+    return SalesInvoice.generate(sales_order_name)

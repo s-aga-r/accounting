@@ -25,6 +25,7 @@ class GeneralLedger(Document):
         credit_gl.voucher_no = voucher_no
         credit_gl.fiscal_year = FiscalYear.get_current_fiscal_year()
         credit_gl.against_account = debit_account
+        credit_gl.flags.ignore_permissions = True
         credit_gl.submit()
         # Debit
         debit_gl = frappe.new_doc("General Ledger")
@@ -40,21 +41,23 @@ class GeneralLedger(Document):
         debit_gl.voucher_no = voucher_no
         debit_gl.fiscal_year = FiscalYear.get_current_fiscal_year()
         debit_gl.against_account = credit_account
+        debit_gl.flags.ignore_permissions = True
         debit_gl.submit()
 
     @staticmethod
     def generate_entries_for_journal_entry(account, transaction_no, party_type, party, debit_amount, credit_amount, voucher_no=None):
-        credit_gl = frappe.new_doc("General Ledger")
-        credit_gl.posting_date = today()
-        credit_gl.transaction_type = "Journal Entry"
-        credit_gl.transaction_no = transaction_no
-        credit_gl.account = account
-        credit_gl.party_type = party_type
-        credit_gl.party = party
-        credit_gl.debit_amount = debit_amount
-        credit_gl.credit_amount = credit_amount
-        credit_gl.account_balance = Account.get_balance(account)
-        credit_gl.voucher_no = voucher_no
-        credit_gl.fiscal_year = FiscalYear.get_current_fiscal_year()
-        credit_gl.against_account = None
-        credit_gl.submit()
+        gl = frappe.new_doc("General Ledger")
+        gl.posting_date = today()
+        gl.transaction_type = "Journal Entry"
+        gl.transaction_no = transaction_no
+        gl.account = account
+        gl.party_type = party_type
+        gl.party = party
+        gl.debit_amount = debit_amount
+        gl.credit_amount = credit_amount
+        gl.account_balance = Account.get_balance(account)
+        gl.voucher_no = voucher_no
+        gl.fiscal_year = FiscalYear.get_current_fiscal_year()
+        gl.against_account = None
+        gl.flags.ignore_permissions = True
+        gl.submit()

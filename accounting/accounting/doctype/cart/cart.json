@@ -1,35 +1,36 @@
 {
- "_liked_by": "[\"Administrator\"]",
+ "_comments": "[]",
+ "_liked_by": "[]",
  "actions": [],
- "autoname": "field:user",
+ "autoname": "field:customer",
  "creation": "2021-09-21 11:27:50.600528",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "user",
+  "customer",
   "items"
  ],
  "fields": [
-  {
-   "fieldname": "user",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "User",
-   "reqd": 1,
-   "set_only_once": 1,
-   "unique": 1
-  },
   {
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Items",
    "options": "Items"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer",
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-24 13:45:42.400785",
+ "modified": "2021-10-04 13:46:34.262885",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Cart",
@@ -49,9 +50,9 @@
    "write": 1
   }
  ],
- "search_fields": "user",
+ "search_fields": "customer",
  "sort_field": "modified",
  "sort_order": "DESC",
- "title_field": "user",
+ "title_field": "customer",
  "track_changes": 1
 }

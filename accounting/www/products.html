@@ -4,6 +4,7 @@
 {% block page_content %}
 <h1 class="mb-5">Products</h1>
 <div>
+    {% if products %}
     {% for product in products %}
     <div class="row bg-light rounded border py-4 mb-4">
         <div class="col-lg-2 col-md-3 col-xs-4">
@@ -32,5 +33,10 @@
         </div>
     </div>
     {% endfor %}
+    {% else %}
+    <div>
+        <b>No product to display!☹️</b>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 {
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
+ "autoname": "field:item_code",
  "creation": "2021-09-16 13:30:00.592329",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -11,7 +12,8 @@
   "standard_rate",
   "image",
   "in_stock",
-  "description"
+  "description",
+  "show_in_products_page"
  ],
  "fields": [
   {
@@ -63,15 +65,22 @@
    "fieldname": "description",
    "fieldtype": "Text",
    "label": "Description"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_in_products_page",
+   "fieldtype": "Check",
+   "label": "Show in Products Page"
   }
  ],
  "image_field": "image",
  "links": [],
- "modified": "2021-09-30 10:19:10.356631",
+ "modified": "2021-10-04 12:46:21.485492",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
  "name_case": "UPPER CASE",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

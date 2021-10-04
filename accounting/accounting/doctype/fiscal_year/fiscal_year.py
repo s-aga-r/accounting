@@ -25,5 +25,6 @@ class FiscalYear(Document):
         new_fy.name = new_fy.year_name = f"{current_year}-{next_year}"
         new_fy.start_date = f"{current_year}/04/01"
         new_fy.end_date = f"{next_year}/03/31"
+        new_fy.flags.ignore_permissions = True
         new_fy.insert()
         return new_fy.name

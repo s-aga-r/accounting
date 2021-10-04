@@ -47,6 +47,21 @@ class PurchaseInvoice(Document):
     def get_billed_amount(purchase_invoice):
         return frappe.db.get_value("Purchase Invoice", purchase_invoice, "total_amount")
 
+    @staticmethod
+    def generate(purchase_order_name):
+        purchase_odr = frappe.get_doc("Purchase Order", purchase_order_name)
+        if purchase_odr.docstatus == 1:
+            purchase_inv = get_mapped_doc("Purchase Order", purchase_order_name,	{
+                "Purchase Order": {
+                    "doctype": "Purchase Invoice",
+                    "field_no_map": ["naming_series", "posting_date"]
+                },
+            })
+            purchase_inv.flags.ignore_permissions = True
+            purchase_inv.submit()
+            return "Invoice No : " + purchase_inv.name
+        return "Submit the form before generating the invoice."
+
     def validate_asset_account(self):
         parent_account = Account.get_parent_account(self.asset_account)
         return parent_account == "Stock Assets" or parent_account == "Stock Liabilities"
@@ -62,14 +77,4 @@ class PurchaseInvoice(Document):
 
 @frappe.whitelist(allow_guest=False)
 def generate_invoice(purchase_order_name):
-    purchase_odr = frappe.get_doc("Purchase Order", purchase_order_name)
-    if purchase_odr.docstatus == 1:
-        purchase_inv = get_mapped_doc("Purchase Order", purchase_order_name,	{
-            "Purchase Order": {
-                "doctype": "Purchase Invoice",
-                "field_no_map": ["naming_series", "posting_date"]
-            },
-        })
-        purchase_inv.submit()
-        return "Invoice No : " + purchase_inv.name
-    return "Submit the form before generating the invoice."
+    return PurchaseInvoice.generate(purchase_order_name)

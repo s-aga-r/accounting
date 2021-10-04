@@ -25,7 +25,9 @@
                         <th scope="row">{{loop.index}}</th>
                         <td>
                             <span>
+                                {% if item.image %}
                                 <img src="{{item.image}}" height="40" width="40" />
+                                {% endif %}
                                 {{item["name"]}}
                             </span>
                         </td>
@@ -43,7 +45,7 @@
                 </tfoot>
             </table>
         </div>
-        <button class="btn btn-success float-right">Checkout</button>
+        <button class="btn btn-success float-right" onclick="checkout()">Checkout</button>
     </div>
     {% else %}
     <div>

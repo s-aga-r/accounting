@@ -11,6 +11,9 @@ def get_context(context):
             "image",
             "in_stock",
         ],
+        filters={
+            "show_in_products_page": 1
+        },
     )
 
     context.products = products
