@@ -19,8 +19,10 @@ def get_context(context):
             item = frappe.get_doc("Item", cart_item.item)
             items.append(
                 {
+                    "code": item.item_code,
                     "name": item.item_name,
                     "image": item.image,
+                    "in_stock": item.in_stock,
                     "rate": cart_item.rate,
                     "qty": cart_item.qty,
                     "amount": cart_item.amount,

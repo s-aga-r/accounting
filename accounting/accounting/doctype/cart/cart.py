@@ -63,4 +63,4 @@ class Cart(Document):
 
 @frappe.whitelist(allow_guest=False)
 def add_item_to_cart(item_code, qty=1):
-    Cart.add_item(frappe.session.user, item_code, qty)
+    Cart.add_item(frappe.session.user, item_code, int(qty))

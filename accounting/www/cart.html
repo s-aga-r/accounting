@@ -28,12 +28,31 @@
                                 {% if item.image %}
                                 <img src="{{item.image}}" height="40" width="40" />
                                 {% endif %}
-                                {{item["name"]}}
+                                {{item.name}}
                             </span>
                         </td>
-                        <td>{{item["rate"]}}</td>
-                        <td>{{item["qty"]}}</td>
-                        <td>{{item["amount"]}}</td>
+                        <td>{{item.rate}}</td>
+                        <td>
+                            <span>
+                                {% if item.qty > 1 %}
+                                <button class="btn btn-secondary btn-sm"
+                                    onclick='update_qty("{{item.code}}",-1)'>-</button>
+                                {% else %}
+                                <button class="btn btn-secondary btn-sm" disabled>-</button>
+                                {% endif %}
+
+                                &nbsp;{{item.qty}}&nbsp;
+
+                                {% if item.qty != item.in_stock %}
+                                <button class="btn btn-secondary btn-sm"
+                                    onclick='update_qty("{{item.code}}",1)'>+</button>
+                                {% else %}
+                                <button class="btn btn-secondary btn-sm"
+                                    onclick='max_qty("{{item.in_stock}}")'>+</button>
+                                {% endif %}
+                            </span>
+                        </td>
+                        <td>{{item.amount}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -45,7 +64,11 @@
                 </tfoot>
             </table>
         </div>
+        {% if total_amount %}
         <button class="btn btn-success float-right" onclick="checkout()">Checkout</button>
+        {% else %}
+        <button class="btn btn-success float-right" disabled>Checkout</button>
+        {% endif %}
     </div>
     {% else %}
     <div>
