@@ -3,9 +3,9 @@
 
 import frappe
 from datetime import date
-from frappe.utils import add_to_date
-from frappe.utils import getdate, today
+from frappe import get_print
 from frappe.model.document import Document
+from frappe.utils import getdate, today, add_to_date
 from accounting.accounting.doctype.cart.cart import Cart
 from accounting.accounting.doctype.item.item import Item
 from accounting.accounting.doctype.party.party import Party
@@ -58,11 +58,17 @@ class SalesOrder(Document):
         sales_odr.asset_account = asset_account
         sales_odr.flags.ignore_permissions = True
         sales_odr.submit()
-        SalesInvoice.generate(sales_odr.name)
+        return SalesInvoice.generate(sales_odr.name)
 
 
 @frappe.whitelist(allow_guest=False)
 def create_order():
     customer = frappe.session.user
-    SalesOrder.create(customer)
+    sales_inv = SalesOrder.create(customer)
     Cart.empty(customer)
+    if sales_inv:
+        frappe.local.response.filecontent = get_print(
+            sales_inv.doctype, sales_inv.name, doc=sales_inv, print_format="Sales Invoice", as_pdf=True
+        )
+        frappe.local.response.filename = sales_inv.name + ".pdf"
+        frappe.local.response.type = "pdf"

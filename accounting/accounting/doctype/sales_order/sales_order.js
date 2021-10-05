@@ -11,7 +11,7 @@ frappe.ui.form.on("Sales Order", {
 						"sales_order_name": frm.doc.name
 					},
 					callback: function (result) {
-						frappe.msgprint(result.message)
+						frappe.msgprint("Invoice No. : " + result.message.name)
 					}
 				})
 			})

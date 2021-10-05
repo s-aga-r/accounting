@@ -1,13 +1,7 @@
 function checkout() {
     frappe.confirm("Are you sure you want to proceed?",
         () => {
-            frappe.call({
-                method: "accounting.accounting.doctype.sales_order.sales_order.create_order",
-                freeze: true,
-                callback: function (result) {
-                    location.reload();
-                }
-            })
+            window.open(window.location.protocol + "//" + window.location.host + "/api/method/accounting.accounting.doctype.sales_order.sales_order.create_order");
         }, () => {
             // Close
         })

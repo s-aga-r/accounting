@@ -60,8 +60,8 @@ class SalesInvoice(Document):
             }, ignore_permissions=True)
             sales_inv.flags.ignore_permissions = True
             sales_inv.submit()
-            return "Invoice No : " + sales_inv.name
-        return "Submit the form before generating the invoice."
+            return sales_inv
+        frappe.throw("Submit the form before generating the invoice.")
 
     def validate_asset_account(self):
         parent_account = Account.get_parent_account(self.asset_account)
