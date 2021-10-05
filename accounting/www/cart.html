@@ -9,7 +9,7 @@
     {% if items %}
     <div>
         <div class="table-responsive">
-            <table class="table">
+            <table class="table text-nowrap">
                 <thead>
                     <tr>
                         <th scope="col">S.No</th>
@@ -17,6 +17,10 @@
                         <th scope="col">Rate(₹)</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Amount(₹)</th>
+                        <th scope="col">
+                            <button class="btn btn-outline-danger btn-sm font-weight-bold" title="Remove all Items"
+                                onclick="remove_all_items()">x</button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,26 +37,30 @@
                         </td>
                         <td>{{item.rate}}</td>
                         <td>
-                            <span>
+                            <span class="font-weight-bold">
                                 {% if item.qty > 1 %}
-                                <button class="btn btn-secondary btn-sm"
+                                <button class="btn btn-outline-secondary btn-sm"
                                     onclick='update_qty("{{item.code}}",-1)'>-</button>
                                 {% else %}
-                                <button class="btn btn-secondary btn-sm" disabled>-</button>
+                                <button class="btn btn-outline-secondary btn-sm" disabled>-</button>
                                 {% endif %}
 
-                                &nbsp;{{item.qty}}&nbsp;
+                                <span class="font-weight-normal">&nbsp;{{item.qty}}&nbsp;</span>
 
                                 {% if item.qty != item.in_stock %}
-                                <button class="btn btn-secondary btn-sm"
+                                <button class="btn btn-outline-secondary btn-sm"
                                     onclick='update_qty("{{item.code}}",1)'>+</button>
                                 {% else %}
-                                <button class="btn btn-secondary btn-sm"
+                                <button class="btn btn-outline-secondary btn-sm"
                                     onclick='max_qty("{{item.in_stock}}")'>+</button>
                                 {% endif %}
                             </span>
                         </td>
                         <td>{{item.amount}}</td>
+                        <td>
+                            <button class="btn btn-outline-danger btn-sm font-weight-bold"
+                                onclick='remove_item("{{item.code}}")'>x</button>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

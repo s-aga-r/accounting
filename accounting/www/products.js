@@ -4,7 +4,7 @@ function redirect(url = "/login") {
 
 function add_to_cart(item_code) {
     frappe.call({
-        method: "accounting.accounting.doctype.cart.cart.add_item_to_cart",
+        method: "accounting.accounting.doctype.cart.cart.add_to_cart",
         args: {
             "item_code": item_code
         },

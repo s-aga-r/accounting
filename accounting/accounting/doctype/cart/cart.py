@@ -54,6 +54,16 @@ class Cart(Document):
             cart.save()
 
     @staticmethod
+    def remove_item(customer, item_code):
+        cart = frappe.get_doc("Cart", customer)
+        for cart_item in cart.items:
+            if cart_item.item == item_code:
+                cart.items.remove(cart_item)
+                break
+        cart.flags.ignore_permissions = True
+        cart.save()
+
+    @staticmethod
     def empty(customer):
         cart = frappe.get_doc("Cart", customer)
         cart.items.clear()
@@ -62,5 +72,15 @@ class Cart(Document):
 
 
 @frappe.whitelist(allow_guest=False)
-def add_item_to_cart(item_code, qty=1):
+def add_to_cart(item_code, qty=1):
     Cart.add_item(frappe.session.user, item_code, int(qty))
+
+
+@frappe.whitelist(allow_guest=False)
+def remove_from_cart(item_code):
+    Cart.remove_item(frappe.session.user, item_code)
+
+
+@frappe.whitelist(allow_guest=False)
+def remove_all_from_cart():
+    Cart.empty(frappe.session.user)
