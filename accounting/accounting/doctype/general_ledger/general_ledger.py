@@ -10,19 +10,18 @@ from accounting.accounting.doctype.fiscal_year.fiscal_year import FiscalYear
 
 class GeneralLedger(Document):
     @staticmethod
-    def generate_entries(debit_account, credit_account, transaction_type, transaction_no, party_type, party, amount, voucher_no=None):
+    def generate_entries(debit_account, credit_account, voucher_type, voucher_no, party_type, party, amount):
         # Credit
         credit_gl = frappe.new_doc("General Ledger")
         credit_gl.posting_date = today()
-        credit_gl.transaction_type = transaction_type
-        credit_gl.transaction_no = transaction_no
+        credit_gl.voucher_type = voucher_type
+        credit_gl.voucher_no = voucher_no
         credit_gl.account = credit_account
         credit_gl.party_type = party_type
         credit_gl.party = party
         credit_gl.debit_amount = 0.0
         credit_gl.credit_amount = amount
         credit_gl.account_balance = Account.get_balance(credit_account)
-        credit_gl.voucher_no = voucher_no
         credit_gl.fiscal_year = FiscalYear.get_current_fiscal_year()
         credit_gl.against_account = debit_account
         credit_gl.flags.ignore_permissions = True
@@ -30,33 +29,31 @@ class GeneralLedger(Document):
         # Debit
         debit_gl = frappe.new_doc("General Ledger")
         debit_gl.posting_date = today()
-        debit_gl.transaction_type = transaction_type
-        debit_gl.transaction_no = transaction_no
+        debit_gl.voucher_type = voucher_type
+        debit_gl.voucher_no = voucher_no
         debit_gl.account = debit_account
         debit_gl.party_type = party_type
         debit_gl.party = party
         debit_gl.debit_amount = amount
         debit_gl.credit_amount = 0.0
         debit_gl.account_balance = Account.get_balance(debit_account)
-        debit_gl.voucher_no = voucher_no
         debit_gl.fiscal_year = FiscalYear.get_current_fiscal_year()
         debit_gl.against_account = credit_account
         debit_gl.flags.ignore_permissions = True
         debit_gl.submit()
 
     @staticmethod
-    def generate_entries_for_journal_entry(account, transaction_no, party_type, party, debit_amount, credit_amount, voucher_no=None):
+    def generate_entries_for_journal_entry(account, voucher_no, party_type, party, debit_amount, credit_amount):
         gl = frappe.new_doc("General Ledger")
         gl.posting_date = today()
-        gl.transaction_type = "Journal Entry"
-        gl.transaction_no = transaction_no
+        gl.voucher_type = "Journal Entry"
+        gl.voucher_no = voucher_no
         gl.account = account
         gl.party_type = party_type
         gl.party = party
         gl.debit_amount = debit_amount
         gl.credit_amount = credit_amount
         gl.account_balance = Account.get_balance(account)
-        gl.voucher_no = voucher_no
         gl.fiscal_year = FiscalYear.get_current_fiscal_year()
         gl.against_account = None
         gl.flags.ignore_permissions = True

@@ -69,11 +69,11 @@ class SalesInvoice(Document):
 
     def make_gl_entries(self, reverse=False):
         if reverse:
-            GeneralLedger.generate_entries(debit_account=self.asset_account, credit_account=self.debit_to, transaction_type="Sales Invoice",
-                                           transaction_no=self.name, party_type="Customer", party=self.customer, amount=self.total_amount)
+            GeneralLedger.generate_entries(debit_account=self.asset_account, credit_account=self.debit_to, voucher_type="Sales Invoice",
+                                           voucher_no=self.name, party_type="Customer", party=self.customer, amount=self.total_amount)
         else:
-            GeneralLedger.generate_entries(debit_account=self.debit_to, credit_account=self.asset_account, transaction_type="Sales Invoice",
-                                           transaction_no=self.name, party_type="Customer", party=self.customer, amount=self.total_amount)
+            GeneralLedger.generate_entries(debit_account=self.debit_to, credit_account=self.asset_account, voucher_type="Sales Invoice",
+                                           voucher_no=self.name, party_type="Customer", party=self.customer, amount=self.total_amount)
 
 
 @frappe.whitelist(allow_guest=False)

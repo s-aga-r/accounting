@@ -9,15 +9,14 @@
  "engine": "InnoDB",
  "field_order": [
   "posting_date",
-  "transaction_type",
-  "transaction_no",
+  "voucher_type",
+  "voucher_no",
   "account",
   "party_type",
   "party",
   "debit_amount",
   "credit_amount",
   "account_balance",
-  "voucher_no",
   "fiscal_year",
   "against_account",
   "amended_from"
@@ -74,17 +73,6 @@
    "options": "Fiscal Year"
   },
   {
-   "fieldname": "transaction_type",
-   "fieldtype": "Select",
-   "label": "Transaction Type",
-   "options": "Sales Invoice\nPurchase Invoice\nPayment Entry\nJournal Entry"
-  },
-  {
-   "fieldname": "transaction_no",
-   "fieldtype": "Data",
-   "label": "Transaction No"
-  },
-  {
    "fieldname": "against_account",
    "fieldtype": "Link",
    "label": "Against Account",
@@ -103,13 +91,19 @@
    "fieldname": "account_balance",
    "fieldtype": "Currency",
    "label": "Account Balance"
+  },
+  {
+   "fieldname": "voucher_type",
+   "fieldtype": "Select",
+   "label": "Voucher Type",
+   "options": "Sales Invoice\nPurchase Invoice\nPayment Entry\nJournal Entry"
   }
  ],
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-30 16:40:55.974411",
+ "modified": "2021-10-14 11:50:08.168927",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "General Ledger",

@@ -42,8 +42,8 @@ class PaymentEntry(Document):
 
     def make_gl_entries(self, reverse=False):
         if reverse:
-            GeneralLedger.generate_entries(debit_account=self.account_paid_from, credit_account=self.account_paid_to, transaction_type="Payment Entry",
-                                           transaction_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount)
+            GeneralLedger.generate_entries(debit_account=self.account_paid_from, credit_account=self.account_paid_to, voucher_type="Payment Entry",
+                                           voucher_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount)
         else:
-            GeneralLedger.generate_entries(debit_account=self.account_paid_to, credit_account=self.account_paid_from, transaction_type="Payment Entry",
-                                           transaction_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount)
+            GeneralLedger.generate_entries(debit_account=self.account_paid_to, credit_account=self.account_paid_from, voucher_type="Payment Entry",
+                                           voucher_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount)

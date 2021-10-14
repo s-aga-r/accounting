@@ -37,7 +37,7 @@ class JournalEntry(Document):
     def make_gl_entries(self, account_entry, reverse=False):
         if reverse:
             GeneralLedger.generate_entries_for_journal_entry(
-                account=account_entry.account, transaction_no=self.name, party_type=account_entry.party_type, party=account_entry.party, debit_amount=account_entry.credit, credit_amount=account_entry.debit)
+                account=account_entry.account, voucher_no=self.name, party_type=account_entry.party_type, party=account_entry.party, debit_amount=account_entry.credit, credit_amount=account_entry.debit)
         else:
             GeneralLedger.generate_entries_for_journal_entry(
-                account=account_entry.account, transaction_no=self.name, party_type=account_entry.party_type, party=account_entry.party, debit_amount=account_entry.debit, credit_amount=account_entry.credit)
+                account=account_entry.account, voucher_no=self.name, party_type=account_entry.party_type, party=account_entry.party, debit_amount=account_entry.debit, credit_amount=account_entry.credit)

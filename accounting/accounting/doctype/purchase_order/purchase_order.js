@@ -37,7 +37,9 @@ frappe.ui.form.on("Purchase Order", {
 				}
 			}
 		});
-		frm.set_value("payment_due_date", frappe.datetime.now_date());
+		if (frm.doc.docstatus == 0) {
+			frm.set_value("payment_due_date", frappe.datetime.now_date());
+		}
 	}
 });
 
