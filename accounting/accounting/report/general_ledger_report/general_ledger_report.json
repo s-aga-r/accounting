@@ -1,4 +1,5 @@
 {
+ "_liked_by": "[\"Administrator\"]",
  "add_total_row": 0,
  "columns": [],
  "creation": "2021-09-17 16:15:46.263811",
@@ -9,13 +10,13 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2021-09-17 16:15:46.263811",
+ "modified": "2021-10-14 15:48:26.369470",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "General Ledger Report",
  "owner": "Administrator",
  "prepared_report": 0,
- "ref_doctype": "GL Entry",
+ "ref_doctype": "General Ledger",
  "report_name": "General Ledger Report",
  "report_type": "Script Report",
  "roles": [
