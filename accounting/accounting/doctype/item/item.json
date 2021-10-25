@@ -52,7 +52,8 @@
    "fieldtype": "Attach Image",
    "in_preview": 1,
    "label": "Image",
-   "options": "image"
+   "options": "image",
+   "reqd": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -75,7 +76,8 @@
  ],
  "image_field": "image",
  "links": [],
- "modified": "2021-10-04 12:46:21.485492",
+ "migration_hash": "e28326ae58d136ad5a21456e93b130f2",
+ "modified": "2021-10-25 11:25:01.676841",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
