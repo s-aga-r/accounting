@@ -12,13 +12,13 @@ class TestAccount(unittest.TestCase):
         pass
 
     def tearDown(self):
-        pass
+        frappe.db.delete("Account")
 
     def test_create_account(self):
         frappe.set_user("Administrator")
         doc = frappe.new_doc("Account")
         doc.account_number = "TEST" + "".join(random.choices(string.ascii_uppercase +
-                                                              string.digits, k=10))
+                                                             string.digits, k=10))
         doc.account_name = "Test Account " + "".join(random.choices(string.ascii_uppercase +
                                                                     string.digits, k=5))
         doc.balance = random.randint(100, 1000)

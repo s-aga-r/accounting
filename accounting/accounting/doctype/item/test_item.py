@@ -12,7 +12,7 @@ class TestItem(unittest.TestCase):
         pass
 
     def tearDown(self):
-        pass
+        frappe.db.delete("Item")
 
     def test_create_item(self):
         frappe.set_user("Administrator")

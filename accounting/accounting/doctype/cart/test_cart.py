@@ -21,14 +21,14 @@ class TestCart(unittest.TestCase):
             doc.insert()
 
     def tearDown(self):
-        pass
+        frappe.db.delete("Cart")
 
     def test_add_item_to_cart(self):
         item_code = None
         frappe.set_user("Administrator")
         doc = frappe.new_doc("Item")
         doc.item_code = item_code = "TEST" + "".join(random.choices(string.ascii_uppercase +
-                                                                     string.digits, k=8))
+                                                                    string.digits, k=8))
         doc.item_name = "Test Item"
         doc.standard_rate = random.randint(100, 1000)
         doc.image = None
