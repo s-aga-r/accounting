@@ -13,6 +13,7 @@ class TestItem(unittest.TestCase):
 
     def tearDown(self):
         frappe.db.delete("Item")
+        print("Item -> Passed")
 
     def test_create_item(self):
         frappe.set_user("Administrator")

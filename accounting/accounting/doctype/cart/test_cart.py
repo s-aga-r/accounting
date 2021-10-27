@@ -7,13 +7,15 @@ import random
 import unittest
 from accounting.accounting.doctype.cart.cart import Cart
 
+test_email = "test_cart@example.com"
+
 
 class TestCart(unittest.TestCase):
     def setUp(self):
-        if not frappe.db.exists("User", "test_cart@example.com"):
+        if not frappe.db.exists("User", test_email):
             frappe.set_user("Administrator")
             doc = frappe.new_doc("User")
-            doc.email = "test_cart@example.com"
+            doc.email = test_email
             doc.first_name = "Test"
             doc.last_name = "Cart"
             doc.user_type = "Website User"
@@ -22,6 +24,9 @@ class TestCart(unittest.TestCase):
 
     def tearDown(self):
         frappe.db.delete("Cart")
+        frappe.db.delete("Item")
+        frappe.db.delete("Party")
+        print("Cart -> Passed")
 
     def test_add_item_to_cart(self):
         item_code = None
@@ -38,12 +43,9 @@ class TestCart(unittest.TestCase):
         doc.flags.ignore_mandatory = True
         doc.insert()
 
-        if not Cart.is_exists("test_cart@example.com"):
-            Cart.create("test_cart@example.com")
-        else:
-            Cart.empty("test_cart@example.com")
-            Cart.add_item("test_cart@example.com", item_code)
+        if Cart.is_exists(test_email):
+            Cart.empty(test_email)
+        Cart.add_item(test_email, item_code)
 
-        doc = frappe.get_doc("Cart", "test_cart@example.com")
-
+        doc = frappe.get_doc("Cart", test_email)
         self.assertEqual(item_code, doc.items[0].item)

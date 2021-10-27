@@ -13,6 +13,7 @@ class TestAccount(unittest.TestCase):
 
     def tearDown(self):
         frappe.db.delete("Account")
+        print(".Account -> Passed")
 
     def test_create_account(self):
         frappe.set_user("Administrator")

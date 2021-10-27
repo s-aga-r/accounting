@@ -22,6 +22,8 @@ class Cart(Document):
     def add_item(customer, item_code, qty=1):
         if not Party.is_exists(customer):
             user = frappe.get_doc("User", customer)
+            if not user:
+                frappe.throw("Something went wrong!")
             Party.create(user.full_name, user.email, user.mobile_no)
         if not Cart.is_exists(customer):
             Cart.create(customer)

@@ -13,6 +13,7 @@ class TestParty(unittest.TestCase):
 
     def tearDown(self):
         frappe.db.delete("Party")
+        print("Party -> Passed")
 
     def test_create_party(self):
         frappe.set_user("Administrator")
