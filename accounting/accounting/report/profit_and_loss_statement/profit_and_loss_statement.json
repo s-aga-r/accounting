@@ -15,7 +15,7 @@
  "name": "Profit and Loss Statement",
  "owner": "Administrator",
  "prepared_report": 0,
- "ref_doctype": "GL Entry",
+ "ref_doctype": "General Ledger",
  "report_name": "Profit and Loss Statement",
  "report_type": "Script Report",
  "roles": [
