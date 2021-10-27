@@ -12,12 +12,13 @@ class COAImporter(Document):
     @staticmethod
     def create_chart(data):
         account_attributes = ["root_type",
-                              "account_type", "account_number", "tax_rate"]
+                              "account_type", "account_number", "tax_rate", "report_type"]
 
         def create_coa(children, parent, root_type):
             for account_name, child in children.items():
                 if isinstance(child, dict):
                     root_type = child.get("root_type", root_type)
+                    report_type = child.get("report_type", "")
                     account_number = child.get("account_number", None)
                     balance = child.get("balance", 0.0)
                     account_type = child.get("account_type", None)
@@ -25,7 +26,7 @@ class COAImporter(Document):
                     if len(set(child.keys() - set(account_attributes))):
                         is_group = 1
                     Account.create(account_name, root_type, account_number,
-                                   balance, parent, account_type, is_group)
+                                   balance, parent, account_type, is_group, report_type)
                     create_coa(child, account_name, root_type)
         create_coa(data, None, None)
 

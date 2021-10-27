@@ -1,5 +1,4 @@
 {
- "_comments": "[]",
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "autoname": "field:account_name",
@@ -11,6 +10,7 @@
   "account_number",
   "account_name",
   "balance",
+  "report_type",
   "lft",
   "rgt",
   "old_parent",
@@ -127,12 +127,21 @@
    "fieldtype": "Currency",
    "label": "Balance",
    "precision": "2"
+  },
+  {
+   "fieldname": "report_type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Report Type",
+   "options": "\nBalance Sheet\nProfit and Loss"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2021-10-01 20:47:53.999511",
+ "migration_hash": "8ce6563dad5b7d5c11d0d50bd58a92d0",
+ "modified": "2021-10-27 11:39:46.919277",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Account",
