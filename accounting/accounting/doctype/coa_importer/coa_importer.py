@@ -7,14 +7,16 @@ from pathlib import Path
 from frappe.model.document import Document
 from accounting.accounting.doctype.account.account import Account
 
+account_attributes = ["root_type",
+                      "account_type", "account_number", "tax_rate", "report_type"]
+count = 0
+
 
 class COAImporter(Document):
     @staticmethod
     def create_chart(data):
-        account_attributes = ["root_type",
-                              "account_type", "account_number", "tax_rate", "report_type"]
-
         def create_coa(children, parent, root_type):
+            global count
             for account_name, child in children.items():
                 if isinstance(child, dict):
                     root_type = child.get("root_type", root_type)
@@ -27,8 +29,10 @@ class COAImporter(Document):
                         is_group = 1
                     Account.create(account_name, root_type, account_number,
                                    balance, parent, account_type, is_group, report_type)
+                    count += 1
                     create_coa(child, account_name, root_type)
         create_coa(data, None, None)
+        return count
 
 
 @frappe.whitelist()
