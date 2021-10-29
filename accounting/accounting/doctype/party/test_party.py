@@ -20,12 +20,16 @@ class TestParty(unittest.TestCase):
         doc = frappe.new_doc("Party")
         doc.party_type = "Customer"
         doc.party_name = "Test Party"
+
+        # Assign a random string of 5 characters with prefix "test_party" and sufix "@example.com".
         doc.email_id = "test_party" + "".join(random.choices(string.ascii_uppercase +
                                                              string.digits, k=5)) + "@example.com"
+
         doc.mobile_number = None
         doc.flags.ignore_mandatory = True
         doc.insert()
-        party_name = frappe.db.get_value(
-            "Party", doc.email_id, "party_name")
 
-        self.assertEqual(party_name, doc.party_name)
+        self.assertTrue(frappe.db.exists({
+            "doctype": "Party",
+            "email_id": doc.email_id
+        }))

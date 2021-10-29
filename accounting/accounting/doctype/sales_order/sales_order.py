@@ -20,7 +20,7 @@ class SalesOrder(Document):
         if getdate(self.payment_due_date) < date.today():
             frappe.throw(
                 "Payment Due Date should not be earlier than today's date.")
-        if Account.get_parent_account(self.debit_to) != "Accounts Receivable":
+        if Account.get_parent(self.debit_to) != "Accounts Receivable":
             frappe.throw(
                 "Debit account parent should be of type Accounts Receivable.")
         if not self.validate_asset_account():
@@ -31,14 +31,13 @@ class SalesOrder(Document):
         Item.are_items_available(self.items)
         self.posting_date = today()
 
-    # Helper Method's
-
-    def validate_asset_account(self):
-        parent_account = Account.get_parent_account(self.asset_account)
+    def validate_asset_account(self) -> bool:
+        parent_account = Account.get_parent(self.asset_account)
         return parent_account == "Stock Assets" or parent_account == "Fixed Assets"
 
     @staticmethod
-    def create(customer, debit_to_account="Debtors", asset_account="Stock In Hand"):
+    def create(customer: str, debit_to_account: str = "Debtors", asset_account: str = "Stock In Hand") -> object:
+        """Create and Submit Sales Order."""
         cart = frappe.get_doc("Cart", customer)
 
         total_qty = 0
@@ -62,7 +61,8 @@ class SalesOrder(Document):
 
 
 @frappe.whitelist(allow_guest=False)
-def create_order():
+def create_order() -> None:
+    """A helper function to call SalesOrder.create()."""
     customer = frappe.session.user
     sales_inv = SalesOrder.create(customer)
     Cart.empty(customer)

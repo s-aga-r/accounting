@@ -20,18 +20,15 @@ def execute(filters=None):
             filters["to_date"] = frappe.db.get_value(
                 "Fiscal Year", end_year, "end_date")
 
-    # Get data by root account type
     asset = get_data("Asset", "Debit", filters.from_date, filters.to_date)
     liability = get_data("Liability", "Credit",
                          filters.from_date, filters.to_date)
     equity = get_data("Equity", "Credit", filters.from_date, filters.to_date)
 
-    # Add data to rows
     data.extend(asset or [])
     data.extend(liability or [])
     data.extend(equity or [])
 
-    # Add columns
     columns = get_columns()
 
     return columns, data

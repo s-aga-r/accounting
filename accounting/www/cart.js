@@ -1,6 +1,8 @@
 function checkout() {
     frappe.confirm("Are you sure you want to proceed?",
         () => {
+            // Yes
+            // Display sales invoice in a new window.
             window.open(window.location.protocol + "//" + window.location.host + "/api/method/accounting.accounting.doctype.sales_order.sales_order.create_order");
         }, () => {
             // Close
@@ -45,6 +47,7 @@ function remove_item(item_code) {
 function remove_all_items() {
     frappe.confirm("Are you sure you want to proceed?",
         () => {
+            // Yes
             frappe.call({
                 method: "accounting.accounting.doctype.cart.cart.remove_all_from_cart",
                 freeze: true,

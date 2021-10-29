@@ -1,10 +1,9 @@
 # Copyright (c) 2013, Sagar Sharma and contributors
 # License: MIT. See LICENSE
 
-from __future__ import unicode_literals
 import frappe
-from accounting.accounting.report.financial_statements import get_data, get_columns
 from frappe.utils import flt
+from accounting.accounting.report.financial_statements import get_data, get_columns
 
 
 def execute(filters=None):
@@ -24,7 +23,6 @@ def execute(filters=None):
 
     income = get_data("Income", "Credit", filters.from_date, filters.to_date)
     expense = get_data("Expense", "Debit", filters.from_date, filters.to_date)
-
     net_profit_loss = get_net_profit_loss(income, expense)
 
     data.extend(income or [])
@@ -49,7 +47,6 @@ def get_net_profit_loss(income, expense):
 
     total_income = flt(income[-2]['opening_balance'], 3)
     total_expense = flt(expense[-2]['opening_balance'], 3)
-
     net_profit_loss['opening_balance'] = total_income - total_expense
 
     return net_profit_loss

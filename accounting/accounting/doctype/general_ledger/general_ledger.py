@@ -10,8 +10,10 @@ from accounting.accounting.doctype.fiscal_year.fiscal_year import FiscalYear
 
 class GeneralLedger(Document):
     @staticmethod
-    def generate_entries(debit_account, credit_account, voucher_type, voucher_no, party_type, party, amount):
-        # Credit
+    def generate_entries(debit_account: str, credit_account: str, voucher_type: str, voucher_no: str, party_type: str, party: str, amount: float) -> None:
+        """Create General Ledger entries."""
+
+        # For Credit
         credit_gl = frappe.new_doc("General Ledger")
         credit_gl.posting_date = today()
         credit_gl.voucher_type = voucher_type
@@ -26,7 +28,8 @@ class GeneralLedger(Document):
         credit_gl.against_account = debit_account
         credit_gl.flags.ignore_permissions = True
         credit_gl.submit()
-        # Debit
+
+        # For Debit
         debit_gl = frappe.new_doc("General Ledger")
         debit_gl.posting_date = today()
         debit_gl.voucher_type = voucher_type
@@ -43,7 +46,8 @@ class GeneralLedger(Document):
         debit_gl.submit()
 
     @staticmethod
-    def generate_entries_for_journal_entry(account, voucher_no, party_type, party, debit_amount, credit_amount):
+    def generate_entries_for_journal_entry(account: str, voucher_no: str, party_type: str, party: str, debit_amount: float, credit_amount: float) -> None:
+        """Create General Ledger entry for Journal Entry."""
         gl = frappe.new_doc("General Ledger")
         gl.posting_date = today()
         gl.voucher_type = "Journal Entry"

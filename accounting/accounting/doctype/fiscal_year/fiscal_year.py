@@ -13,7 +13,9 @@ class FiscalYear(Document):
             frappe.throw("Start Date should be earlier than End Date.")
 
     @staticmethod
-    def get_current_fiscal_year():
+    def get_current_fiscal_year() -> str:
+        """Return current Fiscal Year."""
+
         if frappe.db.count("Fiscal Year") > 0:
             last_fy = frappe.get_last_doc("Fiscal Year")
             if date.today() <= last_fy.end_date:

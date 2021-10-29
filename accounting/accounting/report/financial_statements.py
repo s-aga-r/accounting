@@ -71,7 +71,6 @@ def filter_accounts(accounts, depth=20):
 def sort_accounts(accounts, is_root=False, key="name"):
     def compare_accounts(a, b):
         if re.split('\W+', a[key])[0].isdigit():
-            # if chart of accounts is numbered, then sort by number
             return cmp(a[key], b[key])
         elif is_root:
             if a.report_type != b.report_type and a.report_type == "Balance Sheet":
@@ -83,7 +82,6 @@ def sort_accounts(accounts, is_root=False, key="name"):
             if a.root_type == "Income" and b.root_type == "Expense":
                 return -1
         else:
-            # sort by key (number) or name
             return cmp(a[key], b[key])
         return 1
 
@@ -91,7 +89,7 @@ def sort_accounts(accounts, is_root=False, key="name"):
 
 
 def set_gl_entries_by_account(gl_entries_by_account, from_date, to_date, root_lft, root_rgt):
-    """Returns a dict like { "account": [gl entries], ... }"""
+    """Returns a dict like { "account": [gl entries], ... }."""
     accounts = frappe.db.sql_list("""select name from `tabAccount`
 		where lft >= %s and rgt <= %s""", (root_lft, root_rgt))
 
@@ -132,7 +130,7 @@ def calculate_values(accounts_by_name, gl_entries_by_account, to_date):
 
 
 def accumulate_values_into_parents(accounts, accounts_by_name):
-    """accumulate children's values in parent accounts"""
+    """Accumulate children's values in parent accounts."""
     for d in reversed(accounts):
         if d.parent_account:
             accounts_by_name[d.parent_account]["opening_balance"] = \
@@ -146,7 +144,6 @@ def prepare_data(accounts, balance_must_be, from_date, to_date):
     year_end_date = to_date
 
     for d in accounts:
-        # add to output
         has_value = False
         total = 0
         row = frappe._dict({
@@ -165,7 +162,6 @@ def prepare_data(accounts, balance_must_be, from_date, to_date):
         row["to_date"] = flt(d.get("to_date", 0.0), 3)
 
         if abs(row["to_date"]) >= 0.005:
-            # ignore zero values
             has_value = True
             total += flt(row["to_date"])
 
@@ -193,8 +189,6 @@ def add_total_row(out, root_type, balance_must_be):
 
     if "total" in total_row:
         out.append(total_row)
-
-        # blank row after Total
         out.append({})
 
 

@@ -1,5 +1,4 @@
 {
- "_comments": "[]",
  "_liked_by": "[\"Administrator\"]",
  "actions": [],
  "autoname": "naming_series:",
@@ -23,7 +22,6 @@
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "hidden": 1,
    "in_list_view": 1,
    "label": "Naming Series",
    "options": "ACC-SINV-.YYYY.-"
@@ -101,7 +99,8 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-30 18:18:17.770999",
+ "migration_hash": "a1778466109e3919708cb4468df207b9",
+ "modified": "2021-10-28 20:44:18.327886",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",

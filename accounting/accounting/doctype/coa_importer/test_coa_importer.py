@@ -22,9 +22,10 @@ class TestCOAImporter(unittest.TestCase):
         count = COAImporter.create_chart(TEST_ACCOUNTS)
         self.assertEqual(count, frappe.db.count("Account"))
 
-        acc_name, acc_properties = random.choice(list(TEST_ACCOUNTS.items()))
+        account_name, account_properties = random.choice(
+            list(TEST_ACCOUNTS.items()))
         self.assertTrue(frappe.db.exists({
             "doctype": "Account",
-            "account_name": acc_name,
-            "root_type": acc_properties.get("root_type", None)
+            "account_name": account_name,
+            "root_type": account_properties.get("root_type", None)
         }))

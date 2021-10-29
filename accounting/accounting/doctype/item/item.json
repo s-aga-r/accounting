@@ -68,6 +68,7 @@
    "label": "Description"
   },
   {
+   "allow_in_quick_entry": 1,
    "default": "1",
    "fieldname": "show_in_products_page",
    "fieldtype": "Check",
@@ -77,7 +78,7 @@
  "image_field": "image",
  "links": [],
  "migration_hash": "e28326ae58d136ad5a21456e93b130f2",
- "modified": "2021-10-25 11:25:01.676841",
+ "modified": "2021-10-28 20:31:00.950708",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",

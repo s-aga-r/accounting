@@ -7,7 +7,8 @@ from frappe.model.document import Document
 
 class Item(Document):
     @staticmethod
-    def get_filtered_items(items):
+    def get_filtered_items(items: list) -> dict:
+        """Return a filtered items dict."""
         items_dict = {}
         for item in items:
             if item.item not in items_dict:
@@ -17,7 +18,8 @@ class Item(Document):
         return items_dict
 
     @staticmethod
-    def update_stock(items, operation):
+    def update_stock(items: list, operation: str) -> None:
+        """Increase and decrease the stock while purchase/sales return and sales/purchase return respectively."""
         items_dict = Item.get_filtered_items(items)
         if operation == "increase":
             for item_name, item_qty in items_dict.items():
@@ -33,7 +35,8 @@ class Item(Document):
                 item.save()
 
     @staticmethod
-    def are_items_available(items):
+    def are_items_available(items: list) -> None:
+        """Check the items availability."""
         items_dict = Item.get_filtered_items(items)
         for item_name, item_qty in items_dict.items():
             item = frappe.get_doc("Item", item_name)

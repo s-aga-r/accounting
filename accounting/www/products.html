@@ -1,8 +1,13 @@
 {% extends "templates/web.html" %}
+
+<!-- Page Title -->
 {% block title %}{{ _("Products") }}{% endblock %}
 
 {% block page_content %}
-<h1 class="mb-5">Products</h1>
+
+<!-- Page Heading -->
+<h1 class="mb-5">{{ _("Products") }}</h1>
+
 <div>
     {% if products %}
     {% for product in products %}

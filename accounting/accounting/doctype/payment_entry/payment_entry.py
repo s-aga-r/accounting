@@ -32,18 +32,21 @@ class PaymentEntry(Document):
             self.account_paid_to, self.account_paid_from, self.amount)
         self.make_gl_entries(reverse=True)
 
-    # Helper Method's
-
-    def overbilling_error(self):
+    def overbilling_error(self) -> bool:
+        """Return Overbilling status as True or False."""
         if self.reference == "Sales Invoice":
             return SalesInvoice.get_billed_amount(self.reference_name) < self.amount
         if self.reference == "Purchase Invoice":
             return PurchaseInvoice.get_billed_amount(self.reference_name) < self.amount
 
-    def make_gl_entries(self, reverse=False):
+    def make_gl_entries(self, reverse: bool = False) -> None:
+        """Create General Ledger entry."""
+
+        debit_account = self.account_paid_to
+        credit_account = self.account_paid_from
+
         if reverse:
-            GeneralLedger.generate_entries(debit_account=self.account_paid_from, credit_account=self.account_paid_to, voucher_type="Payment Entry",
-                                           voucher_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount)
-        else:
-            GeneralLedger.generate_entries(debit_account=self.account_paid_to, credit_account=self.account_paid_from, voucher_type="Payment Entry",
-                                           voucher_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount)
+            debit_account, credit_account = credit_account, debit_account
+
+        GeneralLedger.generate_entries(debit_account=debit_account, credit_account=credit_account, voucher_type="Payment Entry",
+                                       voucher_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount)

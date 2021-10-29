@@ -11,12 +11,12 @@
   "account_name",
   "balance",
   "report_type",
+  "root_type",
+  "account_type",
   "lft",
   "rgt",
   "old_parent",
   "parent_account",
-  "root_type",
-  "account_type",
   "is_group"
  ],
  "fields": [
@@ -141,7 +141,7 @@
  "is_tree": 1,
  "links": [],
  "migration_hash": "8ce6563dad5b7d5c11d0d50bd58a92d0",
- "modified": "2021-10-27 11:39:46.919277",
+ "modified": "2021-10-28 20:29:23.270196",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Account",

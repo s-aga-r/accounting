@@ -4,11 +4,12 @@ import frappe
 def get_context(context):
     user = frappe.session.user
 
-    # Redirect anonymous user to login page.
+    # Redirect user to login page if anonymous(Guest).
     if user == "Guest":
         frappe.local.flags.redirect_location = "/login"
         raise frappe.Redirect
 
+    # If the user has item(s) in his cart.
     if frappe.db.exists("Cart", user):
         cart = frappe.get_doc("Cart", user)
 
@@ -17,6 +18,7 @@ def get_context(context):
 
         for cart_item in cart.items:
             item = frappe.get_doc("Item", cart_item.item)
+
             items.append(
                 {
                     "code": item.item_code,

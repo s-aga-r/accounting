@@ -3,6 +3,7 @@
 
 frappe.ui.form.on('COA Importer', {
 	onload: function (frm) {
+		// Make file field empty on Page Load.
 		frm.set_value("file", "")
 	},
 	refresh: function (frm) {
