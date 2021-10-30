@@ -9,6 +9,10 @@ app_color = "grey"
 app_email = "sagar.s@erpnext.com"
 app_license = "MIT"
 
+# Fixtures
+# ------------------
+fixtures = ["Website Settings"]
+
 # Includes in <head>
 # ------------------
 

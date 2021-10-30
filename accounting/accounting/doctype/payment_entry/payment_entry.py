@@ -19,7 +19,7 @@ class PaymentEntry(Document):
             frappe.throw("Insufficient funds in Account Paid From.")
         if self.overbilling_error():
             frappe.throw(
-                "Please specify a proper amount . Amount must be lesser than invoice amount, non zero and non negative.")
+                "Please specify a proper amount. Amount must be lesser than invoice amount, non zero and non negative.")
         self.posting_date = today()
 
     def on_submit(self):
