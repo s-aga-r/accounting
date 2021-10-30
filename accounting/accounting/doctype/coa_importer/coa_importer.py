@@ -65,6 +65,9 @@ def import_coa(file_url: str) -> str:
     json_str = Path(file_doc.get_full_path()).read_text()
     data = json.loads(json_str)
 
+    if frappe.db.count("Account") > 0:
+        frappe.throw("Remove all accounts before proceeding.")
+
     COAImporter.create_chart(data)
 
     return "Imported successfully!"
