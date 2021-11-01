@@ -12,7 +12,7 @@ frappe.query_reports["Balance Sheet"] = {
 			fieldname: "filter_based_on",
 			label: "Filter Based On",
 			fieldtype: "Select",
-			options: ["Fiscal Year"],
+			options: ["Fiscal Year", "Date Range"],
 			default: "Fiscal Year"
 		},
 		{
@@ -21,7 +21,6 @@ frappe.query_reports["Balance Sheet"] = {
 			"fieldtype": "Link",
 			"options": "Fiscal Year",
 			default: current_year + "-" + next_year,
-			"reqd": 1,
 		},
 		{
 			"fieldname": "end_year",
@@ -29,7 +28,18 @@ frappe.query_reports["Balance Sheet"] = {
 			"fieldtype": "Link",
 			"options": "Fiscal Year",
 			default: current_year + "-" + next_year,
-			"reqd": 1
+		},
+		{
+			"fieldname": "from_date",
+			"label": "From Date",
+			"fieldtype": "Date",
+			default: frappe.datetime.add_months(frappe.datetime.get_today(), -12),
+		},
+		{
+			"fieldname": "to_date",
+			"label": "To Date",
+			"fieldtype": "Date",
+			default: frappe.datetime.get_today(),
 		}
 	]
 };

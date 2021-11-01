@@ -6,7 +6,7 @@ const date = new Date();
 let current_year = date.getFullYear();
 let next_year = current_year + 1;
 
-frappe.query_reports["Profit and Loss Statement"] = {
+frappe.query_reports["Trial Balance"] = {
 	"filters": [
 		{
 			fieldname: "filter_based_on",
