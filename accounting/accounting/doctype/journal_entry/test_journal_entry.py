@@ -15,6 +15,7 @@ class TestJournalEntry(unittest.TestCase):
         frappe.db.delete("Account")
         frappe.db.delete("Party")
         frappe.db.delete("Journal Entry")
+        frappe.db.delete("General Ledger")
 
     def test_journal_entry(self):
         journal_entry = create_journal_entry()
