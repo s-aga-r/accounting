@@ -12,13 +12,13 @@ TEST_ACCOUNTS = {"Application of Funds (Assets)": {"Current Assets": {"Accounts 
 
 class TestCOAImporter(unittest.TestCase):
     def setUp(self):
+        frappe.set_user("Administrator")
         frappe.db.delete("Account")
 
     def tearDown(self):
         frappe.db.delete("Account")
-        print("COA Importer -> Passed")
 
-    def test_create_coa(self):
+    def test_coa_importer(self):
         count = COAImporter.create_chart(TEST_ACCOUNTS)
         self.assertEqual(count, frappe.db.count("Account"))
 

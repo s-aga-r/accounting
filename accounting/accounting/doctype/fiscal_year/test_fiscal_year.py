@@ -13,7 +13,6 @@ class TestFiscalYear(unittest.TestCase):
 
     def tearDown(self):
         frappe.db.delete("Fiscal Year")
-        print("Fiscal Year -> Passed")
 
     def test_create_fiscal_year(self):
         current_year = date.today().year

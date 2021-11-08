@@ -66,7 +66,7 @@ def import_coa(file_url: str) -> str:
     data = json.loads(json_str)
 
     if frappe.db.count("Account") > 0:
-        frappe.throw("Remove all accounts before proceeding.")
+        frappe.throw("Transactions against the Company already exist! Chart of Accounts can only be imported for a Company with no transactions.")
 
     COAImporter.create_chart(data)
 

@@ -70,7 +70,6 @@ def get_data(filters):
 
     total_row = calculate_values(
         accounts, gl_entries_by_account, opening_balances, filters)
-    print(total_row)
     accumulate_values_into_parents(accounts, accounts_by_name)
 
     data = prepare_data(accounts, filters, total_row, parent_children_map)
