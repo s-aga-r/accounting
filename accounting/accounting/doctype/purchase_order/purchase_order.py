@@ -12,7 +12,7 @@ from accounting.accounting.doctype.account.account import Account
 class PurchaseOrder(Document):
     def validate(self):
         if Party.get_type(self.supplier) != "Supplier":
-            frappe.throw("Select a valid Supplier.")
+            frappe.throw("Please select a valid Supplier.")
         if getdate(self.payment_due_date) < date.today():
             frappe.throw(
                 "Payment Due Date should not be earlier than today's date.")
@@ -22,8 +22,6 @@ class PurchaseOrder(Document):
         if not self.validate_asset_account():
             frappe.throw(
                 "Asset account parent should be of type Stock Assets or Stock Liabilities.")
-        if Account.get_balance(self.credit_to) < self.total_amount:
-            frappe.throw("Insufficient funds in Credit Account.")
         self.posting_date = today()
 
     def validate_asset_account(self) -> bool:

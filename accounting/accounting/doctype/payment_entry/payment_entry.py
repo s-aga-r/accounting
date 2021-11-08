@@ -14,9 +14,7 @@ from accounting.accounting.doctype.purchase_invoice.purchase_invoice import Purc
 class PaymentEntry(Document):
     def validate(self):
         if Party.get_type(self.party) != self.party_type:
-            frappe.throw(f"Select a valid {self.party_type}.")
-        if Account.get_balance(self.account_paid_from) < self.amount:
-            frappe.throw("Insufficient funds in Account Paid From.")
+            frappe.throw(f"Please select a valid {self.party_type}.")
         if self.overbilling_error():
             frappe.throw(
                 "Please specify a proper amount. Amount must be lesser than invoice amount, non zero and non negative.")

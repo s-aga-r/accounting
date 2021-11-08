@@ -15,7 +15,7 @@ from accounting.accounting.doctype.general_ledger.general_ledger import GeneralL
 class SalesInvoice(Document):
     def validate(self):
         if Party.get_type(self.customer) != "Customer":
-            frappe.throw("Select a valid Customer.")
+            frappe.throw("Please select a valid Customer.")
         if getdate(self.payment_due_date) < date.today():
             frappe.throw(
                 "Payment Due Date should not be earlier than today's date.")
@@ -25,8 +25,6 @@ class SalesInvoice(Document):
         if not self.validate_asset_account():
             frappe.throw(
                 "Asset account parent should be of type Stock Assets or Fixed Assets.")
-        if Account.get_balance(self.asset_account) < self.total_amount:
-            frappe.throw("Insufficient funds in Asset Account.")
         Item.are_items_available(self.items)
         self.posting_date = today()
 

@@ -25,21 +25,15 @@ class Account(NestedSet):
             frappe.throw("Debit and Credit Account must be different.")
 
         from_account = frappe.get_doc("Account", from_account_name)
-
-        # Throw's an error if from_account has insufficient balance.
-        if from_account.balance >= amount:
-            to_account = frappe.get_doc("Account", to_account_name)
-            from_account.balance -= amount
-            to_account.balance += amount
-            from_account.flags.ignore_permissions = True
-            from_account.flags.ignore_mandatory = True
-            from_account.save()
-            to_account.flags.ignore_permissions = True
-            to_account.flags.ignore_mandatory = True
-            to_account.save()
-        else:
-            frappe.throw(
-                f"Insufficient funds in '{from_account.account_name}' Account.")
+        to_account = frappe.get_doc("Account", to_account_name)
+        from_account.balance -= amount
+        to_account.balance += amount
+        from_account.flags.ignore_permissions = True
+        from_account.flags.ignore_mandatory = True
+        from_account.save()
+        to_account.flags.ignore_permissions = True
+        to_account.flags.ignore_mandatory = True
+        to_account.save()
 
     @staticmethod
     def transfer_amount_journal_entry(account_name: str, credit: float, debit: float) -> None:

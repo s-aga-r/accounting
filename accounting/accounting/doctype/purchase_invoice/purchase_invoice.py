@@ -15,7 +15,7 @@ from accounting.accounting.doctype.general_ledger.general_ledger import GeneralL
 class PurchaseInvoice(Document):
     def validate(self):
         if Party.get_type(self.supplier) != "Supplier":
-            frappe.throw("Select a valid Supplier.")
+            frappe.throw("Please select a valid Supplier.")
         if getdate(self.payment_due_date) < date.today():
             frappe.throw(
                 "Payment Due Date should not be earlier than today's date.")
@@ -25,8 +25,6 @@ class PurchaseInvoice(Document):
         if not self.validate_asset_account():
             frappe.throw(
                 "Asset account parent should be of type Stock Assets or Stock Liabilities.")
-        if Account.get_balance(self.credit_to) < self.total_amount:
-            frappe.throw("Insufficient funds in Credit Account.")
         self.posting_date = today()
 
     def on_submit(self):
