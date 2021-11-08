@@ -32,8 +32,10 @@ class Account(NestedSet):
             from_account.balance -= amount
             to_account.balance += amount
             from_account.flags.ignore_permissions = True
+            from_account.flags.ignore_mandatory = True
             from_account.save()
             to_account.flags.ignore_permissions = True
+            to_account.flags.ignore_mandatory = True
             to_account.save()
         else:
             frappe.throw(
