@@ -56,7 +56,7 @@ def create_item():
     doc.standard_rate = random.randint(100, 1000)
     doc.image = None
     doc.in_stock = random.randint(1, 10)
-    doc.description = "This is a Test Description."
+    doc.description = "This is a Description."
     doc.show_in_products_page = False
     doc.flags.ignore_mandatory = True
     doc.insert()

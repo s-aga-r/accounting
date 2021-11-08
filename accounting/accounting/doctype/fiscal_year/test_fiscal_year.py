@@ -9,7 +9,7 @@ from accounting.accounting.doctype.fiscal_year.fiscal_year import FiscalYear
 
 class TestFiscalYear(unittest.TestCase):
     def setUp(self):
-        pass
+        frappe.set_user("Administrator")
 
     def tearDown(self):
         frappe.db.delete("Fiscal Year")

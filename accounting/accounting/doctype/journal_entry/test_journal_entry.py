@@ -14,6 +14,7 @@ class TestJournalEntry(unittest.TestCase):
     def tearDown(self):
         frappe.db.delete("Account")
         frappe.db.delete("Party")
+        frappe.db.delete("Accounting Entries")
         frappe.db.delete("Journal Entry")
         frappe.db.delete("General Ledger")
 
@@ -21,30 +22,28 @@ class TestJournalEntry(unittest.TestCase):
         journal_entry = create_journal_entry()
 
         self.assertTrue(
-            frappe.db.exists(
-                {
-                    "doctype": "Journal Entry",
-                    "name": journal_entry.name,
-                }
-            )
-        )
+            frappe.db.exists({
+                "doctype": "Journal Entry",
+                "name": journal_entry.name,
+            }))
 
 
 def create_journal_entry():
     journal_entry = frappe.new_doc("Journal Entry")
 
-    create_party()
-    create_accounts()
-    debit_accounting_entry = create_debit_accounting_entry()
-    credit_accounting_entry = create_credit_accounting_entry()
+    party = create_party()
+    debit_account, credit_account = create_accounts()
+    debit_accounting_entry = create_debit_accounting_entry(
+        party, debit_account)
+    credit_accounting_entry = create_credit_accounting_entry(
+        party, credit_account)
 
     journal_entry.accounting_entries = [
         debit_accounting_entry,
         credit_accounting_entry,
     ]
-    journal_entry.difference = (
-        debit_accounting_entry.debit - credit_accounting_entry.credit
-    )
+    journal_entry.difference = (debit_accounting_entry.debit -
+                                credit_accounting_entry.credit)
     journal_entry.insert()
 
     debit_accounting_entry.parent = credit_accounting_entry.parent = journal_entry.name
@@ -58,17 +57,19 @@ def create_journal_entry():
 
 def create_party():
     Party.create("Test Party", "test_party@example.com")
+    return "test_party@example.com"
 
 
 def create_accounts():
     Account.create("Test Account 1", balance=1000.0)
     Account.create("Test Account 2", balance=1000.0)
+    return "Test Account 1", "Test Account 2"
 
 
-def create_debit_accounting_entry():
+def create_debit_accounting_entry(party, account):
     debit_accounting_entry = frappe.new_doc("Accounting Entries")
-    debit_accounting_entry.account = "Test Account 1"
-    debit_accounting_entry.party = "test_party@example.com"
+    debit_accounting_entry.account = account
+    debit_accounting_entry.party = party
     debit_accounting_entry.party_type = "Customer"
     debit_accounting_entry.debit = 500.0
     debit_accounting_entry.credit = 0.0
@@ -81,10 +82,10 @@ def create_debit_accounting_entry():
     return debit_accounting_entry
 
 
-def create_credit_accounting_entry():
+def create_credit_accounting_entry(party, account):
     credit_accounting_entry = frappe.new_doc("Accounting Entries")
-    credit_accounting_entry.account = "Test Account 2"
-    credit_accounting_entry.party = "test_party@example.com"
+    credit_accounting_entry.account = account
+    credit_accounting_entry.party = party
     credit_accounting_entry.party_type = "Customer"
     credit_accounting_entry.debit = 0.0
     credit_accounting_entry.credit = 500.0

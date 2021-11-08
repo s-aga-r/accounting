@@ -25,12 +25,14 @@ class Item(Document):
             for item_name, item_qty in items_dict.items():
                 item = frappe.get_doc("Item", item_name)
                 item.in_stock += item_qty
+                item.flags.ignore_mandatory = True
                 item.flags.ignore_permissions = True
                 item.save()
         elif operation == "decrease":
             for item_name, item_qty in items_dict.items():
                 item = frappe.get_doc("Item", item_name)
                 item.in_stock -= item_qty
+                item.flags.ignore_mandatory = True
                 item.flags.ignore_permissions = True
                 item.save()
 
