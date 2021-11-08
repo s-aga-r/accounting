@@ -33,7 +33,9 @@
                         <td>
                             <span>
                                 {% if item.image %}
-                                <img src="{{item.image}}" height="40" width="40" />
+                                <img src="{{item.image}}" height="40" width="40" alt="Loading..." />
+                                {% else %}
+                                <img src="no-image.png" height="40" width="40" alt="Loading..." />
                                 {% endif %}
                                 {{item.name}}
                             </span>

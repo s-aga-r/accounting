@@ -13,7 +13,11 @@
     {% for product in products %}
     <div class="row bg-light rounded border py-4 mb-4">
         <div class="col-lg-2 col-md-3 col-xs-4">
+            {% if product.image %}
             <img class="rounded" src="{{ product.image }}" alt="Loading...">
+            {% else %}
+            <img class="rounded" src="no-image.png" alt="Loading...">
+            {% endif %}
         </div>
         <div class="col">
             <h2>{{ product.item_name }}</h2>
