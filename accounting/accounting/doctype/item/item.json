@@ -52,8 +52,7 @@
    "fieldtype": "Attach Image",
    "in_preview": 1,
    "label": "Image",
-   "options": "image",
-   "reqd": 1
+   "options": "image"
   },
   {
    "fieldname": "in_stock",
@@ -79,7 +78,7 @@
  "image_field": "image",
  "links": [],
  "migration_hash": "e28326ae58d136ad5a21456e93b130f2",
- "modified": "2021-11-08 20:29:31.452498",
+ "modified": "2021-11-08 22:41:43.368507",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Item",
