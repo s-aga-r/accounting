@@ -20,7 +20,6 @@ class TestPurchaseOrder(unittest.TestCase):
         frappe.db.delete("Items")
         frappe.db.delete("Account")
         frappe.db.delete("Party")
-        frappe.db.delete("Journal Entry")
         frappe.db.delete("General Ledger")
         frappe.db.delete("Purchase Order")
         frappe.db.delete("Purchase Invoice")
