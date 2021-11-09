@@ -46,7 +46,7 @@ frappe.ui.form.on('Purchase Invoice', {
 					"payment_type": "Pay",
 					"account_paid_from": "Cash",
 					"account_paid_to": "Creditors",
-					"amount": frm.doc.supplier,
+					"amount": frm.doc.total_amount,
 				};
 				frappe.set_route("payment-entry", "new-payment-entry-1");
 			});
