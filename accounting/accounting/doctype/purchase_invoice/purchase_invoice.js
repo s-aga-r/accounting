@@ -36,6 +36,20 @@ frappe.ui.form.on('Purchase Invoice', {
 				};
 				frappe.set_route("query-report", "General Ledger Report");
 			}, "fa fa-table");
+
+			frm.add_custom_button('Payment', function () {
+				frappe.route_options = {
+					"reference": "Purchase Invoice",
+					"reference_name": frm.doc.name,
+					"party_type": "Supplier",
+					"party": frm.doc.supplier,
+					"payment_type": "Pay",
+					"account_paid_from": "Cash",
+					"account_paid_to": "Creditors",
+					"amount": frm.doc.supplier,
+				};
+				frappe.set_route("payment-entry", "new-payment-entry-1");
+			});
 		}
 	}
 });
