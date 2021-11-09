@@ -46,7 +46,7 @@ class SalesInvoice(Document):
         return frappe.db.get_value("Sales Invoice", sales_invoice, "total_amount")
 
     @staticmethod
-    def generate(sales_order_name: str) -> object:
+    def generate(sales_order_name: str, submit: bool = True) -> object:
         """Create and Submit Sales Invoice using Sales Order."""
 
         sales_odr = frappe.get_doc("Sales Order", sales_order_name)
@@ -59,8 +59,9 @@ class SalesInvoice(Document):
                     "field_no_map": ["naming_series", "posting_date"]
                 }
             }, ignore_permissions=True)
-            sales_inv.flags.ignore_permissions = True
-            sales_inv.submit()
+            if submit:
+                sales_inv.flags.ignore_permissions = True
+                sales_inv.submit()
             return sales_inv
 
         frappe.throw("Submit the form before generating the invoice.")
@@ -85,4 +86,4 @@ class SalesInvoice(Document):
 @frappe.whitelist(allow_guest=False)
 def generate_invoice(sales_order_name: str) -> object:
     """A helper function to call SalesInvoice.generate()."""
-    return SalesInvoice.generate(sales_order_name)
+    return SalesInvoice.generate(sales_order_name, False)

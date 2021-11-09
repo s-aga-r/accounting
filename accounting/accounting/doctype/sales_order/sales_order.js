@@ -4,17 +4,12 @@
 frappe.ui.form.on("Sales Order", {
 	refresh: function (frm) {
 		if (frm.doc.docstatus == 1) {
-			frm.add_custom_button("Generate Invoice", () => {
-				frappe.call({
+			frm.add_custom_button("Sales Invoice", () => {
+				frappe.model.open_mapped_doc({
 					method: "accounting.accounting.doctype.sales_invoice.sales_invoice.generate_invoice",
-					args: {
-						"sales_order_name": frm.doc.name
-					},
-					callback: function (result) {
-						frappe.msgprint("Invoice No. : " + result.message.name)
-					}
+					frm: cur_frm
 				})
-			})
+			});
 		}
 		frm.set_query("customer", function () {
 			return {
