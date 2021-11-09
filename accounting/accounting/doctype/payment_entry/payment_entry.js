@@ -35,5 +35,15 @@ frappe.ui.form.on("Payment Entry", {
 				}
 			}
 		});
+		if (frm.doc.docstatus > 0) {
+			frm.add_custom_button('Ledger', function () {
+				frappe.route_options = {
+					"voucher_no": frm.doc.name,
+					"from_date": "",
+					"to_date": ""
+				};
+				frappe.set_route("query-report", "General Ledger Report");
+			}, "fa fa-table");
+		}
 	}
 });
