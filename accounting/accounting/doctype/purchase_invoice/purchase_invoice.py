@@ -45,7 +45,7 @@ class PurchaseInvoice(Document):
         return frappe.db.get_value("Purchase Invoice", purchase_invoice, "total_amount")
 
     @staticmethod
-    def generate(purchase_order_name: str) -> str:
+    def generate(purchase_order_name: str, submit: bool = False) -> str:
         """Create and Submit Purchase Invoice using Purchase Order."""
 
         purchase_odr = frappe.get_doc("Purchase Order", purchase_order_name)
@@ -58,9 +58,10 @@ class PurchaseInvoice(Document):
                     "field_no_map": ["naming_series", "posting_date"]
                 },
             })
-            purchase_inv.flags.ignore_permissions = True
-            purchase_inv.submit()
-            return "Invoice No : " + purchase_inv.name
+            if submit:
+                purchase_inv.flags.ignore_permissions = True
+                purchase_inv.submit()
+            return purchase_inv
 
         return "Submit the form before generating the invoice."
 

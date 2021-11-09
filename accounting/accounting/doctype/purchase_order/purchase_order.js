@@ -4,15 +4,10 @@
 frappe.ui.form.on("Purchase Order", {
 	refresh: function (frm) {
 		if (frm.doc.docstatus == 1) {
-			frm.add_custom_button("Generate Invoice", () => {
-				frappe.call({
+			frm.add_custom_button("Purchase Invoice", () => {
+				frappe.model.open_mapped_doc({
 					method: "accounting.accounting.doctype.purchase_invoice.purchase_invoice.generate_invoice",
-					args: {
-						"purchase_order_name": frm.doc.name
-					},
-					callback: function (result) {
-						frappe.msgprint(result.message)
-					}
+					frm: cur_frm
 				})
 			})
 		}
