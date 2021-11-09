@@ -126,7 +126,8 @@
    "fieldname": "balance",
    "fieldtype": "Currency",
    "label": "Balance",
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "report_type",
@@ -141,7 +142,7 @@
  "is_tree": 1,
  "links": [],
  "migration_hash": "8ce6563dad5b7d5c11d0d50bd58a92d0",
- "modified": "2021-10-28 20:29:23.270196",
+ "modified": "2021-11-09 09:01:55.485222",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Account",
