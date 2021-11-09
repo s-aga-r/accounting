@@ -27,6 +27,16 @@ frappe.ui.form.on('Purchase Invoice', {
 		if (frm.doc.docstatus == 0) {
 			frm.set_value("payment_due_date", frappe.datetime.now_date());
 		}
+		if (frm.doc.docstatus > 0) {
+			frm.add_custom_button('Ledger', function () {
+				frappe.route_options = {
+					"voucher_no": frm.doc.name,
+					"from_date": "",
+					"to_date": ""
+				};
+				frappe.set_route("query-report", "General Ledger Report");
+			}, "fa fa-table");
+		}
 	}
 });
 
