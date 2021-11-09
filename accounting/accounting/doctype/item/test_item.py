@@ -4,6 +4,7 @@
 import frappe
 import random
 import unittest
+from accounting.accounting.doctype.test_common import create_item
 
 
 class TestItem(unittest.TestCase):
@@ -15,7 +16,6 @@ class TestItem(unittest.TestCase):
 
     def test_item(self):
         item_code = create_item()
-
         self.assertTrue(
             frappe.db.exists(
                 {
@@ -24,18 +24,3 @@ class TestItem(unittest.TestCase):
                 }
             )
         )
-
-
-def create_item():
-    doc = frappe.new_doc("Item")
-    doc.item_code = "TESTITEM"
-    doc.item_name = "Test Item"
-    doc.standard_rate = random.randint(100, 1000)
-    doc.image = None
-    doc.in_stock = random.randint(1, 10)
-    doc.description = "This is a Description."
-    doc.show_in_products_page = False
-    doc.flags.ignore_mandatory = True
-    doc.insert()
-
-    return doc.item_code
