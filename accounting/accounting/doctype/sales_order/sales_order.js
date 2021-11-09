@@ -1,51 +1,51 @@
 // Copyright (c) 2021, Sagar Sharma and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("Sales Order", {
+frappe.ui.form.on('Sales Order', {
 	refresh: function (frm) {
 		if (frm.doc.docstatus == 1) {
-			frm.add_custom_button("Sales Invoice", () => {
+			frm.add_custom_button('Sales Invoice', () => {
 				frappe.model.open_mapped_doc({
-					method: "accounting.accounting.doctype.sales_invoice.sales_invoice.generate_invoice",
+					method: 'accounting.accounting.doctype.sales_invoice.sales_invoice.generate_invoice',
 					frm: cur_frm
 				})
 			});
 		}
-		frm.set_query("customer", function () {
+		frm.set_query('customer', function () {
 			return {
 				filters: {
-					party_type: "Customer"
+					party_type: 'Customer'
 				}
 			};
 		});
-		frm.set_query("item", "items", () => {
+		frm.set_query('item', 'items', () => {
 			return {
 				filters: {
-					in_stock: [">", 0]
+					in_stock: ['>', 0]
 				}
 			}
 		});
-		frm.set_query("debit_to", function () {
+		frm.set_query('debit_to', function () {
 			return {
 				filters: {
-					parent_account: "Accounts Receivable"
+					parent_account: 'Accounts Receivable'
 				}
 			}
 		});
-		frm.set_query("asset_account", function () {
+		frm.set_query('asset_account', function () {
 			return {
 				filters: {
-					parent_account: ["in", ["Stock Assets", "Fixed Assets"]]
+					parent_account: ['in', ['Stock Assets', 'Fixed Assets']]
 				}
 			}
 		});
 		if (frm.doc.docstatus == 0) {
-			frm.set_value("payment_due_date", frappe.datetime.now_date());
+			frm.set_value('payment_due_date', frappe.datetime.now_date());
 		}
 	}
 });
 
-frappe.ui.form.on("Items", {
+frappe.ui.form.on('Items', {
 	items_remove(frm) {
 		calc_grand_total(frm);
 	},
@@ -74,7 +74,7 @@ function calc_grand_total(frm) {
 	var total_qty = 0;
 	var items = frm.doc.items;
 	items.forEach(function (item) {
-		if (item.item != null && typeof item.qty == "number" && typeof item.amount == "number") {
+		if (item.item != null && typeof item.qty == 'number' && typeof item.amount == 'number') {
 			total_amount += item.amount;
 			total_qty += item.qty;
 		}

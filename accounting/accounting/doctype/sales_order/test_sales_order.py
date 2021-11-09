@@ -26,7 +26,7 @@ class TestSalesOrder(unittest.TestCase):
 
     def test_sales_order(self):
         sales_order = create_sales_order()
-        sales_invoice = SalesInvoice.generate(sales_order.name)
+        sales_invoice = SalesInvoice.generate_invoice(sales_order.name)
         self.assertTrue(frappe.db.exists("Sales Invoice", sales_invoice.name))
 
 

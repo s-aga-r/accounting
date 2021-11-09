@@ -11,7 +11,7 @@ function checkout() {
 
 function update_qty(item_code, qty) {
     frappe.call({
-        method: "accounting.accounting.doctype.cart.cart.add_to_cart",
+        method: "accounting.accounting.doctype.cart.cart.add_item_to_cart",
         args: {
             "item_code": item_code,
             "qty": qty,
@@ -33,7 +33,7 @@ function max_qty(in_stock) {
 
 function remove_item(item_code) {
     frappe.call({
-        method: "accounting.accounting.doctype.cart.cart.remove_from_cart",
+        method: "accounting.accounting.doctype.cart.cart.remove_item_from_cart",
         args: {
             "item_code": item_code,
         },
@@ -49,7 +49,7 @@ function remove_all_items() {
         () => {
             // Yes
             frappe.call({
-                method: "accounting.accounting.doctype.cart.cart.remove_all_from_cart",
+                method: "accounting.accounting.doctype.cart.cart.remove_all_items_from_cart",
                 freeze: true,
                 callback: function (result) {
                     location.reload();

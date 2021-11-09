@@ -34,10 +34,9 @@ def create_journal_entry():
 
     party = create_party()
     debit_account, credit_account = create_accounts()
-    debit_accounting_entry = create_debit_accounting_entry(
-        party, debit_account)
-    credit_accounting_entry = create_credit_accounting_entry(
-        party, credit_account)
+
+    debit_accounting_entry, credit_accounting_entry = create_accounting_entries(
+        debit_account, credit_account, party)
 
     journal_entry.accounting_entries = [
         debit_accounting_entry,
@@ -67,33 +66,25 @@ def create_accounts():
     return "Test Account 1", "Test Account 2"
 
 
-def create_debit_accounting_entry(party, account):
-    debit_accounting_entry = frappe.new_doc("Accounting Entries")
-    debit_accounting_entry.account = account
-    debit_accounting_entry.party = party
-    debit_accounting_entry.party_type = "Customer"
-    debit_accounting_entry.debit = 500.0
-    debit_accounting_entry.credit = 0.0
-    debit_accounting_entry.transaction_description = None
-    debit_accounting_entry.parent = "journal_entry"
-    debit_accounting_entry.parentfield = "Accounting Entries"
-    debit_accounting_entry.parenttype = "Journal Entry"
-    debit_accounting_entry.insert()
+def create_accounting_entries(debit_account, credit_account, party):
+    def create_accounting_entry(account, party, debit, credit):
+        accounting_entry = frappe.new_doc("Accounting Entries")
+        accounting_entry.account = account
+        accounting_entry.party = party
+        accounting_entry.party_type = "Customer"
+        accounting_entry.debit = debit
+        accounting_entry.credit = credit
+        accounting_entry.transaction_description = None
+        accounting_entry.parent = "journal_entry"
+        accounting_entry.parentfield = "Accounting Entries"
+        accounting_entry.parenttype = "Journal Entry"
+        accounting_entry.insert()
 
-    return debit_accounting_entry
+        return accounting_entry
 
+    debit_accounting_entry = create_accounting_entry(
+        debit_account, party, 500.0, 0.0)
+    credit_accounting_entry = create_accounting_entry(
+        credit_account, party, 0.0, 500.0)
 
-def create_credit_accounting_entry(party, account):
-    credit_accounting_entry = frappe.new_doc("Accounting Entries")
-    credit_accounting_entry.account = account
-    credit_accounting_entry.party = party
-    credit_accounting_entry.party_type = "Customer"
-    credit_accounting_entry.debit = 0.0
-    credit_accounting_entry.credit = 500.0
-    credit_accounting_entry.transaction_description = None
-    credit_accounting_entry.parent = "journal_entry"
-    credit_accounting_entry.parentfield = "Accounting Entries"
-    credit_accounting_entry.parenttype = "Journal Entry"
-    credit_accounting_entry.insert()
-
-    return credit_accounting_entry
+    return debit_accounting_entry, credit_accounting_entry

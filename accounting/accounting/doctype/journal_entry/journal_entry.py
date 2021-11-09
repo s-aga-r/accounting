@@ -42,5 +42,5 @@ class JournalEntry(Document):
         if reverse:
             debit_amount, credit_amount = credit_amount, debit_amount
 
-        GeneralLedger.generate_entries_for_journal_entry(
-            account=account_entry.account, voucher_no=self.name, party_type=account_entry.party_type, party=account_entry.party, debit_amount=debit_amount, credit_amount=credit_amount)
+        GeneralLedger.generate_entry(
+            account_entry.account, "Journal Entry", self.name, account_entry.party_type, account_entry.party, debit_amount, credit_amount)

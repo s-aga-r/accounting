@@ -90,18 +90,18 @@ class Cart(Document):
 
 
 @frappe.whitelist(allow_guest=False)
-def add_to_cart(item_code: str, qty: int = 1) -> None:
+def add_item_to_cart(item_code: str, qty: int = 1) -> None:
     """A helper function to call Cart.add_item()."""
     Cart.add_item(frappe.session.user, item_code, int(qty))
 
 
 @frappe.whitelist(allow_guest=False)
-def remove_from_cart(item_code: str) -> None:
+def remove_item_from_cart(item_code: str) -> None:
     """A helper function to call Cart.remove_item()."""
     Cart.remove_item(frappe.session.user, item_code)
 
 
 @frappe.whitelist(allow_guest=False)
-def remove_all_from_cart() -> None:
+def remove_all_items_from_cart() -> None:
     """A helper function to call Cart.empty()."""
     Cart.empty(frappe.session.user)

@@ -6,12 +6,12 @@ frappe.ui.form.on('Journal Entry', {
 		if (frm.doc.docstatus > 0) {
 			frm.add_custom_button('Ledger', function () {
 				frappe.route_options = {
-					"voucher_no": frm.doc.name,
-					"from_date": "",
-					"to_date": ""
+					'voucher_no': frm.doc.name,
+					'from_date': '',
+					'to_date': ''
 				};
-				frappe.set_route("query-report", "General Ledger Report");
-			}, "fa fa-table");
+				frappe.set_route('query-report', 'General Ledger Report');
+			}, 'fa fa-table');
 		}
 	}
 });
@@ -33,7 +33,7 @@ function calc_grand_total(frm) {
 	var total_credit = 0;
 	var acc_entries = frm.doc.accounting_entries;
 	acc_entries.forEach(function (acc_entry) {
-		if (acc_entry.party != null && typeof acc_entry.debit == "number" && typeof acc_entry.credit == "number") {
+		if (acc_entry.party != null && typeof acc_entry.debit == 'number' && typeof acc_entry.credit == 'number') {
 			total_debit += acc_entry.debit;
 			total_credit += acc_entry.credit;
 		}

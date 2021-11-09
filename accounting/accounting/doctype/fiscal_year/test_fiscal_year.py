@@ -14,7 +14,7 @@ class TestFiscalYear(unittest.TestCase):
     def tearDown(self):
         frappe.db.delete("Fiscal Year")
 
-    def test_create_fiscal_year(self):
+    def test_fiscal_year(self):
         current_year = date.today().year
         next_year = current_year + 1
         self.assertEqual(FiscalYear.get_current_fiscal_year(),

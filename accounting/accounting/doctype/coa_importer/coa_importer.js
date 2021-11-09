@@ -4,15 +4,15 @@
 frappe.ui.form.on('COA Importer', {
 	onload: function (frm) {
 		// Make file field empty on Page Load.
-		frm.set_value("file", "")
+		frm.set_value('file', '')
 	},
 	refresh: function (frm) {
 		frm.disable_save();
-		frm.add_custom_button("Import", () => {
+		frm.add_custom_button('Import', () => {
 			frappe.call({
-				method: "accounting.accounting.doctype.coa_importer.coa_importer.import_coa",
+				method: 'accounting.accounting.doctype.coa_importer.coa_importer.import_coa',
 				args: {
-					"file_url": frm.doc.file
+					'file_url': frm.doc.file
 				},
 				freeze: true,
 				callback: function (result) {

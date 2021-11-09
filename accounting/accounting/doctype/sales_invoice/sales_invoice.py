@@ -46,7 +46,7 @@ class SalesInvoice(Document):
         return frappe.db.get_value("Sales Invoice", sales_invoice, "total_amount")
 
     @staticmethod
-    def generate(sales_order_name: str, submit: bool = True) -> object:
+    def generate_invoice(sales_order_name: str, submit: bool = True) -> object:
         """Create and Submit Sales Invoice using Sales Order."""
 
         sales_odr = frappe.get_doc("Sales Order", sales_order_name)
@@ -76,14 +76,11 @@ class SalesInvoice(Document):
         debit_account = self.debit_to
         credit_account = self.asset_account
 
-        if reverse:
-            debit_account, credit_account = credit_account, debit_account
-
         GeneralLedger.generate_entries(debit_account=debit_account, credit_account=credit_account, voucher_type="Sales Invoice",
-                                       voucher_no=self.name, party_type="Customer", party=self.customer, amount=self.total_amount)
+                                       voucher_no=self.name, party_type="Customer", party=self.customer, amount=self.total_amount, reverse=reverse)
 
 
 @frappe.whitelist(allow_guest=False)
 def generate_invoice(sales_order_name: str) -> object:
-    """A helper function to call SalesInvoice.generate()."""
-    return SalesInvoice.generate(sales_order_name, False)
+    """A helper function to call SalesInvoice.generate_invoice()."""
+    return SalesInvoice.generate_invoice(sales_order_name, False)

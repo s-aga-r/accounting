@@ -45,7 +45,7 @@ class PurchaseInvoice(Document):
         return frappe.db.get_value("Purchase Invoice", purchase_invoice, "total_amount")
 
     @staticmethod
-    def generate(purchase_order_name: str, submit: bool = False) -> str:
+    def generate_invoice(purchase_order_name: str, submit: bool = False) -> str:
         """Create and Submit Purchase Invoice using Purchase Order."""
 
         purchase_odr = frappe.get_doc("Purchase Order", purchase_order_name)
@@ -75,14 +75,11 @@ class PurchaseInvoice(Document):
         debit_account = self.asset_account
         credit_account = self.credit_to
 
-        if reverse:
-            debit_account, credit_account = credit_account, debit_account
-
         GeneralLedger.generate_entries(debit_account=debit_account, credit_account=credit_account, voucher_type="Purchase Invoice",
-                                       voucher_no=self.name, party_type="Supplier", party=self.supplier, amount=self.total_amount)
+                                       voucher_no=self.name, party_type="Supplier", party=self.supplier, amount=self.total_amount, reverse=reverse)
 
 
 @frappe.whitelist(allow_guest=False)
 def generate_invoice(purchase_order_name: str) -> str:
-    """A helper function to call PurchaseInvoice.generate()."""
-    return PurchaseInvoice.generate(purchase_order_name)
+    """A helper function to call PurchaseInvoice.generate_invoice()."""
+    return PurchaseInvoice.generate_invoice(purchase_order_name)

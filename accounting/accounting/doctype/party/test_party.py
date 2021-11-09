@@ -15,8 +15,8 @@ class TestParty(unittest.TestCase):
 
     def test_party(self):
         email_id = create_party()
-
-        self.assertTrue(frappe.db.exists({"doctype": "Party", "email_id": email_id}))
+        self.assertTrue(frappe.db.exists(
+            {"doctype": "Party", "email_id": email_id}))
 
 
 def create_party():

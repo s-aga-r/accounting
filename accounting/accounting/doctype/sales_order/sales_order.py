@@ -55,7 +55,7 @@ class SalesOrder(Document):
         sales_odr.asset_account = asset_account
         sales_odr.flags.ignore_permissions = True
         sales_odr.submit()
-        return SalesInvoice.generate(sales_odr.name)
+        return SalesInvoice.generate_invoice(sales_odr.name)
 
 
 @frappe.whitelist(allow_guest=False)

@@ -43,8 +43,5 @@ class PaymentEntry(Document):
         debit_account = self.account_paid_to
         credit_account = self.account_paid_from
 
-        if reverse:
-            debit_account, credit_account = credit_account, debit_account
-
         GeneralLedger.generate_entries(debit_account=debit_account, credit_account=credit_account, voucher_type="Payment Entry",
-                                       voucher_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount)
+                                       voucher_no=self.name, party_type=self.party_type, party=self.party, amount=self.amount, reverse=reverse)
