@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Sales Order', {
-	refresh: function (frm) {
+	refresh: (frm) => {
 		if (frm.doc.docstatus == 1) {
 			frm.add_custom_button('Sales Invoice', () => {
 				frappe.model.open_mapped_doc({
@@ -11,7 +11,7 @@ frappe.ui.form.on('Sales Order', {
 				})
 			});
 		}
-		frm.set_query('customer', function () {
+		frm.set_query('customer', () => {
 			return {
 				filters: {
 					party_type: 'Customer'
@@ -25,14 +25,14 @@ frappe.ui.form.on('Sales Order', {
 				}
 			}
 		});
-		frm.set_query('debit_to', function () {
+		frm.set_query('debit_to', () => {
 			return {
 				filters: {
 					parent_account: 'Accounts Receivable'
 				}
 			}
 		});
-		frm.set_query('asset_account', function () {
+		frm.set_query('asset_account', () => {
 			return {
 				filters: {
 					parent_account: ['in', ['Stock Assets', 'Fixed Assets']]
@@ -47,33 +47,33 @@ frappe.ui.form.on('Sales Order', {
 
 frappe.ui.form.on('Items', {
 	items_remove(frm) {
-		calc_grand_total(frm);
+		calculate_grand_total(frm);
 	},
 	item(frm, cdt, cdn) {
-		calc_amount(frm, cdt, cdn);
+		calculate_amount(frm, cdt, cdn);
 	},
 	qty(frm, cdt, cdn) {
-		calc_amount(frm, cdt, cdn);
+		calculate_amount(frm, cdt, cdn);
 	},
 	rate(frm, cdt, cdn) {
-		calc_amount(frm, cdt, cdn);
+		calculate_amount(frm, cdt, cdn);
 	},
 });
 
-function calc_amount(frm, cdt, cdn) {
+let calculate_amount = (frm, cdt, cdn) => {
 	let item = frappe.get_doc(cdt, cdn);
 	if (item.item)
 		item.amount = item.rate * item.qty;
 	else
 		item.rate = item.amount = 0.0;
-	calc_grand_total(frm);
+	calculate_grand_total(frm);
 }
 
-function calc_grand_total(frm) {
-	var total_amount = 0;
-	var total_qty = 0;
-	var items = frm.doc.items;
-	items.forEach(function (item) {
+let calculate_grand_total = (frm) => {
+	let total_amount = 0;
+	let total_qty = 0;
+	let items = frm.doc.items;
+	items.forEach((item) => {
 		if (item.item != null && typeof item.qty == 'number' && typeof item.amount == 'number') {
 			total_amount += item.amount;
 			total_qty += item.qty;

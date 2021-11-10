@@ -2,11 +2,11 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('COA Importer', {
-	onload: function (frm) {
+	onload: (frm) => {
 		// Make file field empty on Page Load.
 		frm.set_value('file', '')
 	},
-	refresh: function (frm) {
+	refresh: (frm) => {
 		frm.disable_save();
 		frm.add_custom_button('Import', () => {
 			frappe.call({
@@ -15,7 +15,7 @@ frappe.ui.form.on('COA Importer', {
 					'file_url': frm.doc.file
 				},
 				freeze: true,
-				callback: function (result) {
+				callback: (result) => {
 					frappe.msgprint(result.message)
 				}
 			})

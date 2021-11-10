@@ -2,8 +2,8 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Sales Invoice', {
-	refresh: function (frm) {
-		frm.set_query('customer', function () {
+	refresh: (frm) => {
+		frm.set_query('customer', () => {
 			return {
 				filters: {
 					party_type: 'Customer'
@@ -17,14 +17,14 @@ frappe.ui.form.on('Sales Invoice', {
 				}
 			}
 		});
-		frm.set_query('debit_to', function () {
+		frm.set_query('debit_to', () => {
 			return {
 				filters: {
 					parent_account: 'Accounts Receivable'
 				}
 			}
 		});
-		frm.set_query('asset_account', function () {
+		frm.set_query('asset_account', () => {
 			return {
 				filters: {
 					parent_account: ['in', ['Stock Assets', 'Fixed Assets']]
@@ -35,7 +35,7 @@ frappe.ui.form.on('Sales Invoice', {
 			frm.set_value('payment_due_date', frappe.datetime.now_date());
 		}
 		if (frm.doc.docstatus > 0) {
-			frm.add_custom_button('Ledger', function () {
+			frm.add_custom_button('Ledger', () => {
 				frappe.route_options = {
 					'voucher_no': frm.doc.name,
 					'from_date': '',
@@ -44,7 +44,7 @@ frappe.ui.form.on('Sales Invoice', {
 				frappe.set_route('query-report', 'General Ledger Report');
 			}, 'fa fa-table');
 
-			frm.add_custom_button('Payment', function () {
+			frm.add_custom_button('Payment', () => {
 				frappe.route_options = {
 					'reference': 'Sales Invoice',
 					'reference_name': frm.doc.name,
@@ -63,33 +63,33 @@ frappe.ui.form.on('Sales Invoice', {
 
 frappe.ui.form.on('Items', {
 	items_remove(frm) {
-		calc_grand_total(frm);
+		calculate_grand_total(frm);
 	},
 	item(frm, cdt, cdn) {
-		calc_amount(frm, cdt, cdn);
+		calculate_amount(frm, cdt, cdn);
 	},
 	qty(frm, cdt, cdn) {
-		calc_amount(frm, cdt, cdn);
+		calculate_amount(frm, cdt, cdn);
 	},
 	rate(frm, cdt, cdn) {
-		calc_amount(frm, cdt, cdn);
+		calculate_amount(frm, cdt, cdn);
 	},
 });
 
-function calc_amount(frm, cdt, cdn) {
+let calculate_amount = (frm, cdt, cdn) => {
 	let item = frappe.get_doc(cdt, cdn);
 	if (item.item)
 		item.amount = item.rate * item.qty;
 	else
 		item.rate = item.amount = 0.0;
-	calc_grand_total(frm);
+	calculate_grand_total(frm);
 }
 
-function calc_grand_total(frm) {
-	var total_amount = 0;
-	var total_qty = 0;
-	var items = frm.doc.items;
-	items.forEach(function (item) {
+let calculate_grand_total = (frm) => {
+	let total_amount = 0;
+	let total_qty = 0;
+	let items = frm.doc.items;
+	items.forEach((item) => {
 		if (item.item != null && typeof item.qty == 'number' && typeof item.amount == 'number') {
 			total_amount += item.amount;
 			total_qty += item.qty;

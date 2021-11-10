@@ -2,9 +2,9 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Journal Entry', {
-	refresh: function (frm) {
+	refresh: (frm) => {
 		if (frm.doc.docstatus > 0) {
-			frm.add_custom_button('Ledger', function () {
+			frm.add_custom_button('Ledger', () => {
 				frappe.route_options = {
 					'voucher_no': frm.doc.name,
 					'from_date': '',
@@ -18,21 +18,21 @@ frappe.ui.form.on('Journal Entry', {
 
 frappe.ui.form.on('Accounting Entries', {
 	accounting_entries_remove(frm) {
-		calc_grand_total(frm);
+		calculate_grand_total(frm);
 	},
 	debit(frm) {
-		calc_grand_total(frm);
+		calculate_grand_total(frm);
 	},
 	credit(frm) {
-		calc_grand_total(frm);
+		calculate_grand_total(frm);
 	}
 });
 
-function calc_grand_total(frm) {
-	var total_debit = 0;
-	var total_credit = 0;
-	var acc_entries = frm.doc.accounting_entries;
-	acc_entries.forEach(function (acc_entry) {
+let calculate_grand_total = (frm) => {
+	let total_debit = 0;
+	let total_credit = 0;
+	let acc_entries = frm.doc.accounting_entries;
+	acc_entries.forEach((acc_entry) => {
 		if (acc_entry.party != null && typeof acc_entry.debit == 'number' && typeof acc_entry.credit == 'number') {
 			total_debit += acc_entry.debit;
 			total_credit += acc_entry.credit;

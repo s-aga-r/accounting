@@ -20,15 +20,15 @@ frappe.ui.form.on('Payment Entry', {
 			});
 		}
 	},
-	refresh: function (frm) {
-		frm.set_query('party', function () {
+	refresh: (frm) => {
+		frm.set_query('party', () => {
 			return {
 				filters: {
 					party_type: frm.doc.party_type
 				}
 			};
 		});
-		frm.set_query('reference', function () {
+		frm.set_query('reference', () => {
 			return {
 				filters: {
 					name: ['in', ['Sales Invoice', 'Purchase Invoice']]
@@ -36,7 +36,7 @@ frappe.ui.form.on('Payment Entry', {
 			}
 		});
 		if (frm.doc.docstatus > 0) {
-			frm.add_custom_button('Ledger', function () {
+			frm.add_custom_button('Ledger', () => {
 				frappe.route_options = {
 					'voucher_no': frm.doc.name,
 					'from_date': '',

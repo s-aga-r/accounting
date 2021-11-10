@@ -1,4 +1,4 @@
-function checkout() {
+let checkout = () => {
     frappe.confirm("Are you sure you want to proceed?",
         () => {
             // Yes
@@ -9,7 +9,7 @@ function checkout() {
         })
 }
 
-function update_qty(item_code, qty) {
+let update_qty = (item_code, qty) => {
     frappe.call({
         method: "accounting.accounting.doctype.cart.cart.add_item_to_cart",
         args: {
@@ -17,13 +17,13 @@ function update_qty(item_code, qty) {
             "qty": qty,
         },
         freeze: true,
-        callback: function (result) {
+        callback: (result) => {
             location.reload();
         }
     });
 }
 
-function max_qty(in_stock) {
+let max_qty = (in_stock) => {
     frappe.msgprint({
         title: __("Message"),
         indicator: "red",
@@ -31,27 +31,27 @@ function max_qty(in_stock) {
     });
 }
 
-function remove_item(item_code) {
+let remove_item = (item_code) => {
     frappe.call({
         method: "accounting.accounting.doctype.cart.cart.remove_item_from_cart",
         args: {
             "item_code": item_code,
         },
         freeze: true,
-        callback: function (result) {
+        callback: (result) => {
             location.reload();
         }
     });
 }
 
-function remove_all_items() {
+let remove_all_items = () => {
     frappe.confirm("Are you sure you want to proceed?",
         () => {
             // Yes
             frappe.call({
                 method: "accounting.accounting.doctype.cart.cart.remove_all_items_from_cart",
                 freeze: true,
-                callback: function (result) {
+                callback: (result) => {
                     location.reload();
                 }
             });
